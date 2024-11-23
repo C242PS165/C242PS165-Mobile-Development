@@ -24,4 +24,12 @@
     <string name="smartfarm">SmartFarm</string>
     <string name="si_sahabat_petani">sahabat petani</string>
     <string name="let_s_start">Let\'s Start</string>
+
+    <!-- Onboarding Text -->
+    <string name="subtitle_onboarding1">We are here to help you</string>
+    <string name="subtitle_onboarding2">too see latest  weather</string>
+    <string name="subtitle_onboarding3">Planting advice/planting procedures</string>
+    <string name="next">Continue</string>
+    <string name="onboarding_image">onboarding image</string>
+    <string name="title">title onboarding</string>
 </resources>

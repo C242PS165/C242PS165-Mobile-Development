@@ -62,4 +62,7 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation (libs.androidx.datastore.preferences)
+
+    implementation("me.relex:circleindicator:2.1.6")
+
 }
