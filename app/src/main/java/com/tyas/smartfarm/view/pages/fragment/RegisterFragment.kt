@@ -36,6 +36,16 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.cbPassword1.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.edRegisterPassword.inputType = android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                binding.edRegisterPassword.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            // Memindahkan kursor ke akhir teks saat tipe input berubah
+            binding.edRegisterPassword.setSelection(binding.edRegisterPassword.text?.length ?: 0)
+        }
+
         binding.btnDaftar.setOnClickListener {
             val email = binding.edRegisterEmail.text.toString().trim()
             val password = binding.edRegisterPassword.text.toString().trim()

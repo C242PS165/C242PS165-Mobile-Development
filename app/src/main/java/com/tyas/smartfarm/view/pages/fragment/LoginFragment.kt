@@ -48,6 +48,16 @@ class LoginFragment : Fragment() {
             }
         }
 
+        binding.cbPassword2.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.edPassword.inputType = android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                binding.edPassword.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            // Memindahkan kursor ke akhir teks saat tipe input berubah
+            binding.edPassword.setSelection(binding.edPassword.text?.length ?: 0)
+        }
+
         // Tombol Login
         binding.btnLogin.setOnClickListener {
             val email = binding.edLoginEmail.text.toString().trim()
