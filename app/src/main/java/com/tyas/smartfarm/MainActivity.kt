@@ -63,7 +63,9 @@ class MainActivity : AppCompatActivity() {
 
             // Sembunyikan BottomNavigation di halaman tertentu
             when (destination.id) {
-                R.id.loginFragment, R.id.registerFragment -> controlBottomNavigationVisibility(false)
+                R.id.splashFragment, // Tambahkan SplashFragment ke daftar ini
+                R.id.loginFragment,
+                R.id.registerFragment -> controlBottomNavigationVisibility(false)
                 else -> controlBottomNavigationVisibility(true)
             }
         }
