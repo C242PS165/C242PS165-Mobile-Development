@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SmartFarm</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello World</string>
     <string name="cuaca">Cuaca</string>
     <string name="tanaman">Tanaman</string>
     <string name="profile">Profile</string>
@@ -21,4 +21,7 @@
     <string name="create_account">Create your new account</string>
     <string name="tv_question2">Kamu sudah memiliki akun?</string>
     <string name="splash_logo">Splash Logo</string>
+    <string name="smartfarm">SmartFarm</string>
+    <string name="si_sahabat_petani">sahabat petani</string>
+    <string name="let_s_start">Let\'s Start</string>
 </resources>

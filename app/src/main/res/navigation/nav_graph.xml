@@ -10,8 +10,26 @@
         android:name="com.tyas.smartfarm.view.pages.fragment.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
+            android:id="@+id/action_splashFragment_to_onBoardFragment"
+            app:destination="@id/onBoardFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
+    </fragment>
+
+    <!-- OnBoard Fragment -->
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.OnBoardFragment"
+        tools:layout="@layout/fragment_on_board">
+        <action
+            android:id="@+id/action_onBoardFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_onBoardFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
 
     <!-- Login Fragment -->

@@ -16,12 +16,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inisialisasi NavHostFragment dan NavController
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
-        // Atur navigasi manual untuk Bottom Navigation
         binding.bottomNavigation.setOnItemSelectedListener { menuItemId ->
             when (menuItemId) {
                 R.id.navigation_lay_weather -> {
@@ -63,7 +61,8 @@ class MainActivity : AppCompatActivity() {
 
             // Sembunyikan BottomNavigation di halaman tertentu
             when (destination.id) {
-                R.id.splashFragment, // Tambahkan SplashFragment ke daftar ini
+                R.id.splashFragment,
+                R.id.onBoardFragment,
                 R.id.loginFragment,
                 R.id.registerFragment -> controlBottomNavigationVisibility(false)
                 else -> controlBottomNavigationVisibility(true)
