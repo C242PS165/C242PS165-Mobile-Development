@@ -1,4 +1,4 @@
-package com.tyas.smartfarm.view
+package com.tyas.smartfarm.view.pages.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.viewpager2.widget.ViewPager2
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.util.DataStoreManager
@@ -44,6 +45,12 @@ class CarouselFragment : Fragment() {
         }
 
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
+        viewPager.setPageTransformer { page, position ->
+            page.translationX = -position * page.width / 2 // Efek translasi
+            page.alpha = 0.25f + (1 - kotlin.math.abs(position)) // Efek transparansi
+            page.scaleY = 0.85f + (1 - kotlin.math.abs(position)) * 0.15f // Efek skala
+        }
+
         val indicator: CircleIndicator3 = view.findViewById(R.id.indicator)
 
         // Data untuk carousel
@@ -58,20 +65,36 @@ class CarouselFragment : Fragment() {
         indicator.setViewPager(viewPager)
 
         // Tombol "Continue" untuk swipe terakhir
+        val options = navOptions {
+            anim {
+                enter = R.anim.slide_in_right
+                exit = R.anim.slide_out_left
+                popEnter = R.anim.slide_in_left
+                popExit = R.anim.slide_out_right
+            }
+        }
+
         view.findViewById<TextView>(R.id.continue_button).setOnClickListener {
-            findNavController().navigate(R.id.action_carouselFragment_to_onBoardFragment)
+            findNavController().navigate(R.id.action_carouselFragment_to_onBoardFragment, null, options)
         }
 
         // Callback untuk halaman terakhir
+        val continueButton = view.findViewById<TextView>(R.id.continue_button)
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 if (position == items.size - 1) {
-                    // Tombol "Continue" hanya terlihat di halaman terakhir
-                    view.findViewById<TextView>(R.id.continue_button).visibility = View.VISIBLE
+                    continueButton.visibility = View.VISIBLE
+                    continueButton.alpha = 0f
+                    continueButton.animate().alpha(1f).setDuration(300).start()
                 } else {
-                    view.findViewById<TextView>(R.id.continue_button).visibility = View.GONE
+                    continueButton.animate().alpha(0f).setDuration(300).withEndAction {
+                        continueButton.visibility = View.GONE
+                    }.start()
                 }
             }
         })
+
+
+
     }
 }

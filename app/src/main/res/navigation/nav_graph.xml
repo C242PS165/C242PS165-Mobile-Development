@@ -4,8 +4,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/carouselFragment">
 
-
-
     <!-- Splash Fragment -->
     <fragment
         android:id="@+id/splashFragment"
@@ -92,16 +90,25 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/carouselFragment"
-        android:name="com.tyas.smartfarm.view.CarouselFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.CarouselFragment"
         android:label="CarouselFragment" >
         <action
             android:id="@+id/action_carouselFragment_to_onBoardFragment"
-            app:destination="@id/onBoardFragment" />
+            app:destination="@id/onBoardFragment"
+            app:popUpTo="@id/carouselFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_carouselFragment_to_plantFragment"
             app:destination="@id/plantFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

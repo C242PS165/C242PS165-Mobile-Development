@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
             // Sembunyikan BottomNavigation di halaman tertentu
             when (destination.id) {
-//                R.id.splashFragment,
+                R.id.splashFragment,
                 R.id.carouselFragment,
                 R.id.onBoardFragment,
                 R.id.loginFragment,
