@@ -4,18 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentSettingsBinding
 import com.tyas.smartfarm.util.DataStoreManager
-import kotlinx.coroutines.flow.first
+import com.tyas.smartfarm.viewmodel.SettingsViewModel
 import kotlinx.coroutines.launch
-import androidx.lifecycle.lifecycleScope
 
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+
+    private val settingsViewModel: SettingsViewModel by viewModels {
+        val dataStoreManager = DataStoreManager(requireContext())
+        SettingsViewModel.Factory(dataStoreManager)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,33 +37,44 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dataStoreManager = DataStoreManager(requireContext())
-
-        // Set state awal dari switch berdasarkan data di DataStore
-        lifecycleScope.launch {
-            binding.switchNotification.isChecked = dataStoreManager.isNotificationEnabled().first()
+        // Observe notifications setting
+        settingsViewModel.notificationsEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            binding.switchNotifications.isChecked = isEnabled
         }
 
-        // Event Listener untuk Notifikasi
-        binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
-            lifecycleScope.launch {
-                dataStoreManager.setNotificationEnabled(isChecked)
-                val message = if (isChecked) {
-                    "Notifikasi diaktifkan"
-                } else {
-                    "Notifikasi dinonaktifkan"
+        // Handle notification toggle
+        binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
+            settingsViewModel.updateNotificationsEnabled(isChecked)
+            Toast.makeText(requireContext(), "Notifications ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
+        }
+
+        // Setup language spinner
+        val languages = listOf("English", "Bahasa Indonesia", "Español")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, languages)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerLanguage.adapter = adapter
+
+        // Observe selected language
+        settingsViewModel.selectedLanguage.observe(viewLifecycleOwner) { language ->
+            binding.spinnerLanguage.setSelection(languages.indexOf(language))
+        }
+
+        // Handle language selection
+        binding.spinnerLanguage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedLanguage = languages[position]
+                lifecycleScope.launch {
+                    settingsViewModel.updateLanguage(selectedLanguage)
                 }
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // Navigasi ke Tentang Aplikasi
-        binding.btnAboutApp.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                "SmartFarm v1.0\nDibuat untuk membantu petani Indonesia!",
-                Toast.LENGTH_LONG
-            ).show()
+        // Logout button
+        binding.btnLogout.setOnClickListener {
+            Toast.makeText(requireContext(), "Logged out!", Toast.LENGTH_SHORT).show()
+            // Handle logout logic here
         }
     }
 

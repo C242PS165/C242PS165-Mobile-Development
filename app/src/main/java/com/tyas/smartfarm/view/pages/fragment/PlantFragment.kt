@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentPlantBinding
@@ -86,6 +87,7 @@ class PlantFragment : Fragment() {
 
         // Add Plant Button Action
         binding.btnAddPlant.setOnClickListener {
+            findNavController().navigate(R.id.action_plantFragment_to_addPlantFragment)
             Toast.makeText(requireContext(), "Add Plant clicked!", Toast.LENGTH_SHORT).show()
         }
     }

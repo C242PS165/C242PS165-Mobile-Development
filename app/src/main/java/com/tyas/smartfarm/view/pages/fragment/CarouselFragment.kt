@@ -57,7 +57,7 @@ class CarouselFragment : Fragment() {
         val items = listOf(
             CarouselItem(R.drawable.farmer3, "We are here to help you"),
             CarouselItem(R.drawable.cloudy, "To see latest weather"),
-            CarouselItem(R.drawable.farmer2, "Planting advice/planting procedures")
+            CarouselItem(R.drawable.farmer2, "Planting advice and\nPlanting procedures")
         )
 
         val adapter = CarouselAdapter(items)

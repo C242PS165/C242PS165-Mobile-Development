@@ -38,9 +38,19 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Navigasi ke SettingsFragment
+        binding.btnSettings.setOnClickListener {
+            navigateToSettings()
+        }
+
+        // Tombol Logout
         binding.btnLogout.setOnClickListener {
             logoutUser()
         }
+    }
+
+    private fun navigateToSettings() {
+        findNavController().navigate(R.id.settingsFragment)
     }
 
     private fun logoutUser() {

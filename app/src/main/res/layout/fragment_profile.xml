@@ -22,6 +22,17 @@
             android:gravity="center"
             android:layout_marginBottom="32dp" />
 
+        <!-- Tombol Settings -->
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengaturan"
+            android:backgroundTint="@color/light_sea_green"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center" />
+
         <!-- Tombol Logout -->
         <Button
             android:id="@+id/btnLogout"

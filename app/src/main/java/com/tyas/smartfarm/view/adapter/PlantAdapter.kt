@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.model.Plant
@@ -27,6 +28,13 @@ class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<Plant
         holder.plantImage.setImageResource(plant.imageResId)
         holder.plantName.text = plant.name
         holder.plantStatus.text = plant.status
+
+        val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
+        holder.plantName.typeface = poppinsBold
+
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins)
+        holder.plantStatus.typeface = poppinsRegular
+
     }
 
     override fun getItemCount(): Int = plants.size

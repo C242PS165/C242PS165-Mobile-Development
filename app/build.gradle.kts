@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -63,6 +64,11 @@ dependencies {
 
     implementation (libs.androidx.datastore.preferences)
 
-    implementation("me.relex:circleindicator:2.1.6")
+    implementation(libs.circleindicator)
 
+    implementation ("androidx.room:room-runtime:2.6.1")
+    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
 }

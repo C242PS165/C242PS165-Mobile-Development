@@ -14,8 +14,9 @@ class DataStoreManager(private val context: Context) {
 
     companion object {
         private val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
-        private val NOTIFICATION_ENABLED = booleanPreferencesKey("notification_enabled")
+        private val NOTIFICATIONS_ENABLED = booleanPreferencesKey("notification_enabled")
         private val USER_EMAIL = stringPreferencesKey("user_email") // Key untuk email
+        private val LANGUAGE_SELECTED = stringPreferencesKey("language_selected")
     }
 
     // Login Status
@@ -44,16 +45,29 @@ class DataStoreManager(private val context: Context) {
         }
     }
 
-    // Notification Status
-    suspend fun setNotificationEnabled(isEnabled: Boolean) {
+    // Notifikasi
+    suspend fun setNotificationsEnabled(isEnabled: Boolean) {
         context.dataStore.edit { preferences ->
-            preferences[NOTIFICATION_ENABLED] = isEnabled
+            preferences[NOTIFICATIONS_ENABLED] = isEnabled
         }
     }
 
-    fun isNotificationEnabled(): Flow<Boolean> {
+    fun getNotificationsEnabled(): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
-            preferences[NOTIFICATION_ENABLED] ?: true
+            preferences[NOTIFICATIONS_ENABLED] ?: true
+        }
+    }
+
+    // Bahasa
+    suspend fun setLanguage(language: String) {
+        context.dataStore.edit { preferences ->
+            preferences[LANGUAGE_SELECTED] = language
+        }
+    }
+
+    fun getLanguage(): Flow<String> {
+        return context.dataStore.data.map { preferences ->
+            preferences[LANGUAGE_SELECTED] ?: "English"
         }
     }
 }

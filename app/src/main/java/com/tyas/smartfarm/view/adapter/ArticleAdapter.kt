@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.model.Article
@@ -27,6 +28,13 @@ class ArticleAdapter(private val articles: List<Article>) : RecyclerView.Adapter
         holder.articleImage.setImageResource(article.imageResId)
         holder.articleTitle.text = article.title
         holder.articleDescription.text = article.description
+
+        val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
+        holder.articleTitle.typeface = poppinsBold
+
+        val poppinsReguler = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins)
+        holder.articleDescription.typeface = poppinsReguler
+
     }
 
     override fun getItemCount(): Int = articles.size
