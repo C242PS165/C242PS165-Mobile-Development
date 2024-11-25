@@ -6,20 +6,20 @@
         android:id="@+id/navigation_lay_weather"
         android:icon="@drawable/ic_lay_weather"
         android:title="@string/cuaca"
-        app:cnb_backgroundColor="@color/teal"
+        app:cnb_backgroundColor="@color/light_green"
         app:cnb_iconColor="@color/white" />
     <item
         android:id="@+id/navigation_lay_plant"
         android:icon="@drawable/ic_lay_plant"
         android:title="@string/tanaman"
-        app:cnb_backgroundColor="@color/teal"
+        app:cnb_backgroundColor="@color/light_green"
         app:cnb_iconColor="@color/white" />
 
     <item
         android:id="@+id/navigation_lay_profile"
         android:icon="@drawable/ic_lay_person"
         android:title="@string/profile"
-        app:cnb_backgroundColor="@color/teal"
+        app:cnb_backgroundColor="@color/light_green"
         app:cnb_iconColor="@color/white" />
 
 </menu>
