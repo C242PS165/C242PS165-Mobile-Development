@@ -31,7 +31,7 @@ class HourlyForecastAdapter(private val hourlyData: List<HourlyWeather>) :
         holder.temperatureTextView.text = item.temperature
         holder.weatherIconImageView.setImageResource(item.iconResId)
 
-        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins)
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
         holder.timeTextView.typeface = poppinsRegular
         holder.temperatureTextView.typeface = poppinsRegular
 

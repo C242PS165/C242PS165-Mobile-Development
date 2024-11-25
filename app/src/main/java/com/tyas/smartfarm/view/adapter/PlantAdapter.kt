@@ -32,7 +32,7 @@ class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<Plant
         val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
         holder.plantName.typeface = poppinsBold
 
-        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins)
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
         holder.plantStatus.typeface = poppinsRegular
 
     }

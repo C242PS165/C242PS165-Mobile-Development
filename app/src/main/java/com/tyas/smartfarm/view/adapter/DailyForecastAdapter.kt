@@ -38,7 +38,7 @@ class DailyForecastAdapter(private val dailyData: List<DailyWeather>) :
         holder.temperatureTextView.text = item.temperature
         holder.weatherIconImageView.setImageResource(item.iconResId)
 
-        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins)
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
         holder.dayTextView.typeface = poppinsRegular
         holder.descriptionTextView.typeface = poppinsRegular
         holder.temperatureTextView.typeface = poppinsRegular

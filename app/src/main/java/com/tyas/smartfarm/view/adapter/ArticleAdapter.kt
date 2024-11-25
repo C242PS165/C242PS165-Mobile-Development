@@ -32,7 +32,7 @@ class ArticleAdapter(private val articles: List<Article>) : RecyclerView.Adapter
         val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
         holder.articleTitle.typeface = poppinsBold
 
-        val poppinsReguler = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins)
+        val poppinsReguler = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
         holder.articleDescription.typeface = poppinsReguler
 
     }
