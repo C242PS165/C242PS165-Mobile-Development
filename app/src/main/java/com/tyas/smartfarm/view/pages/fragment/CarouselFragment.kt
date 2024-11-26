@@ -47,7 +47,7 @@ class CarouselFragment : Fragment() {
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         viewPager.setPageTransformer { page, position ->
             page.translationX = -position * page.width / 2 // Efek translasi
-            page.alpha = 0.25f + (1 - kotlin.math.abs(position)) // Efek transparansi
+            page.alpha = 0.05f + (1 - kotlin.math.abs(position)) // Efek transparansi
             page.scaleY = 0.85f + (1 - kotlin.math.abs(position)) * 0.15f // Efek skala
         }
 
@@ -55,9 +55,21 @@ class CarouselFragment : Fragment() {
 
         // Data untuk carousel
         val items = listOf(
-            CarouselItem(R.drawable.farmer3, "We are here to help you"),
-            CarouselItem(R.drawable.cloudy, "To see latest weather"),
-            CarouselItem(R.drawable.farmer2, "Planting advice and\nPlanting procedures")
+            CarouselItem(
+                R.drawable.farmer3,
+                "We are here to help you",
+                "Providing guidance and solutions for farmers to enhance productivity and efficiency"
+            ),
+            CarouselItem(
+                R.drawable.cloudy,
+                "To see latest weather",
+                "Stay updated with real-time weather forecasts and predictions for your farming needs"
+            ),
+            CarouselItem(
+                R.drawable.farmer2,
+                "Planting advice and\nPlanting procedures",
+                "Explore tailored planting tips and detailed step-by-step farming procedures"
+            )
         )
 
         val adapter = CarouselAdapter(items)

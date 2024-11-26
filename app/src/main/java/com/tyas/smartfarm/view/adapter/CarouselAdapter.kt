@@ -8,7 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.R
 
-data class CarouselItem(val imageResId: Int, val title: String)
+data class CarouselItem(
+    val imageResId: Int,
+    val title: String,
+    val description: String
+)
 
 class CarouselAdapter(private val items: List<CarouselItem>) :
     RecyclerView.Adapter<CarouselAdapter.OnboardingViewHolder>() {
@@ -16,10 +20,12 @@ class CarouselAdapter(private val items: List<CarouselItem>) :
     inner class OnboardingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val image: ImageView = view.findViewById(R.id.image)
         private val title: TextView = view.findViewById(R.id.textTitle)
+        private val description: TextView = view.findViewById(R.id.textDescrition)
 
         fun bind(item: CarouselItem) {
             image.setImageResource(item.imageResId)
             title.text = item.title
+            description.text = item.description
         }
     }
 
