@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.google.android.material.button.MaterialButton
 import com.tyas.smartfarm.R
 
@@ -49,45 +50,78 @@ class OnBoardFragment : Fragment() {
         startAnimations()
 
         btnToLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_onBoardFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_onBoardFragment_to_loginFragment, null, options)
         }
 
         btnToRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_onBoardFragment_to_registerFragment)
+            findNavController().navigate(R.id.action_onBoardFragment_to_registerFragment, null, options )
         }
     }
 
     private fun startAnimations() {
+        // Animasi fade-in dan fade-out untuk gambar opacity
         imgOpacity.visibility = View.VISIBLE
         imgOpacity.alpha = 0f
         imgOpacity.animate()
-            .alpha(1f) // Muncul
-            .setDuration(500) // Durasi fade-in
+            .alpha(1f)
+            .setDuration(500)
+            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
             .withEndAction {
                 imgOpacity.animate()
-                    .alpha(0f) // Memudar
-                    .setDuration(1000) // Durasi fade-out
+                    .alpha(0f)
+                    .setDuration(1000)
+                    .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
                     .withEndAction {
-                        imgOpacity.visibility = View.GONE // Sembunyikan gambar opacity
+                        imgOpacity.visibility = View.GONE
 
-                        // Tampilkan teks dengan animasi masuk dari kiri ke kanan
+                        // Animasi teks masuk dari kiri ke kanan
                         tvTeks1.visibility = View.VISIBLE
                         tvTeks1.translationX = -500f
-                        tvTeks1.animate().translationX(0f).setDuration(800).start()
+                        tvTeks1.alpha = 0f
+                        tvTeks1.animate()
+                            .translationX(0f)
+                            .alpha(1f)
+                            .setDuration(800)
+                            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+                            .start()
 
                         tvTeks2.visibility = View.VISIBLE
                         tvTeks2.translationX = -500f
-                        tvTeks2.animate().translationX(0f).setDuration(800).start()
+                        tvTeks2.alpha = 0f
+                        tvTeks2.animate()
+                            .translationX(0f)
+                            .alpha(1f)
+                            .setDuration(800)
+                            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+                            .start()
 
-                        // Tampilkan tombol dengan animasi fade-in
+                        // Animasi tombol fade-in
                         btnToLogin.visibility = View.VISIBLE
                         btnToLogin.alpha = 0f
-                        btnToLogin.animate().alpha(1f).setDuration(600).start()
+                        btnToLogin.animate()
+                            .alpha(1f)
+                            .setDuration(600)
+                            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+                            .start()
 
                         btnToRegister.visibility = View.VISIBLE
                         btnToRegister.alpha = 0f
-                        btnToRegister.animate().alpha(1f).setDuration(600).start()
+                        btnToRegister.animate()
+                            .alpha(1f)
+                            .setDuration(600)
+                            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+                            .start()
                     }.start()
             }.start()
+    }
+
+    // Tombol "Continue" untuk swipe terakhir
+    private val options = navOptions {
+        anim {
+            enter = R.anim.slide_in_right
+            exit = R.anim.slide_out_left
+            popEnter = R.anim.slide_in_left
+            popExit = R.anim.slide_out_right
+        }
     }
 }
