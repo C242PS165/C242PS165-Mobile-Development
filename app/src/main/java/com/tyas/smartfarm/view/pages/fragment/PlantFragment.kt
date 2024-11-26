@@ -98,7 +98,7 @@ class PlantFragment : Fragment() {
     )
 
     private fun getDummyArticles() = listOf(
-        Article("Article 1", "This issasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa a description", R.drawable.dummy),
+        Article("Article 1", "This issasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa a description", R.drawable.article_dummy),
         Article("Article 2", "This is a description", R.drawable.dummy),
         Article("Article 3", "Another description", R.drawable.dummy),
         Article("Article 4", "Another description", R.drawable.dummy),

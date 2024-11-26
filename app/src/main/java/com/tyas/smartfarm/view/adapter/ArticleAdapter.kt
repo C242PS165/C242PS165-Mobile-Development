@@ -15,7 +15,7 @@ class ArticleAdapter(private val articles: List<Article>) : RecyclerView.Adapter
     inner class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val articleImage: ImageView = view.findViewById(R.id.iv_article_image)
         val articleTitle: TextView = view.findViewById(R.id.tv_article_title)
-        val articleDescription: TextView = view.findViewById(R.id.tv_article_description)
+        //val articleDescription: TextView = view.findViewById(R.id.tv_article_description)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -27,13 +27,13 @@ class ArticleAdapter(private val articles: List<Article>) : RecyclerView.Adapter
         val article = articles[position]
         holder.articleImage.setImageResource(article.imageResId)
         holder.articleTitle.text = article.title
-        holder.articleDescription.text = article.description
+        //holder.articleDescription.text = article.description
 
         val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
         holder.articleTitle.typeface = poppinsBold
 
         val poppinsReguler = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
-        holder.articleDescription.typeface = poppinsReguler
+        //holder.articleDescription.typeface = poppinsReguler
 
     }
 
