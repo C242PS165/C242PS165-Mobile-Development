@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
+        // Ubah startDestination di sini
+        navController.setGraph(R.navigation.nav_graph, null)
+
         binding.bottomNavigation.setOnItemSelectedListener { menuItemId ->
             when (menuItemId) {
                 R.id.navigation_lay_weather -> {
@@ -46,24 +49,17 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.weatherFragment -> binding.bottomNavigation.setItemSelected(
-                    R.id.navigation_lay_weather,
-                    true
-                )
+                    R.id.navigation_lay_weather, true)
                 R.id.plantFragment -> binding.bottomNavigation.setItemSelected(
-                    R.id.navigation_lay_plant,
-                    true
-                )
+                    R.id.navigation_lay_plant, true)
                 R.id.profileFragment -> binding.bottomNavigation.setItemSelected(
-                    R.id.navigation_lay_profile,
-                    true
-                )
+                    R.id.navigation_lay_profile, true)
             }
 
             // Sembunyikan BottomNavigation di halaman tertentu
             when (destination.id) {
                 R.id.addPlantFragment,
                 R.id.splashFragment,
-                R.id.carouselFragment,
                 R.id.onBoardFragment,
                 R.id.loginFragment,
                 R.id.registerFragment -> controlBottomNavigationVisibility(false)

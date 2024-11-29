@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/carouselFragment">
+    app:startDestination="@id/splashFragment">
 
     <!-- Splash Fragment -->
     <fragment
@@ -97,23 +97,14 @@
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/carouselFragment"
-        android:name="com.tyas.smartfarm.view.pages.fragment.CarouselFragment"
-        android:label="CarouselFragment" >
-        <action
-            android:id="@+id/action_carouselFragment_to_onBoardFragment"
-            app:destination="@id/onBoardFragment"
-            app:popUpTo="@id/carouselFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_carouselFragment_to_plantFragment"
-            app:destination="@id/plantFragment" />
-    </fragment>
+
+    <!-- Settings Fragment -->
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.tyas.smartfarm.view.pages.fragment.SettingsFragment"
         android:label="SettingsFragment" />
+
+    <!-- Add Plant Fragment -->
     <fragment
         android:id="@+id/addPlantFragment"
         android:name="com.tyas.smartfarm.view.pages.fragment.AddPlantFragment"

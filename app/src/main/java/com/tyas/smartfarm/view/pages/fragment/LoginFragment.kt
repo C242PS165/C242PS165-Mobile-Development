@@ -133,7 +133,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToMain() {
-        if (!hasNavigatedToMain) { // Prevent multiple navigations
+        if (!hasNavigatedToMain) {
             hasNavigatedToMain = true
             findNavController().navigate(R.id.action_loginFragment_to_plantFragment)
         }
