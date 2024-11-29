@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_green"
     tools:context=".view.pages.fragment.ProfileFragment"
     android:padding="16dp">
 
@@ -20,16 +21,33 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_bold"
             android:layout_marginBottom="32dp" />
+
+        <!-- Tombol Settings -->
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_settings"
+            android:text="Pengaturan"
+            android:elevation="20dp"
+            android:backgroundTint="@color/dark_green"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"
+            android:gravity="" />
 
         <!-- Tombol Logout -->
         <Button
             android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_logout"
             android:text="Logout"
-            android:backgroundTint="@color/dark_red"
+            android:elevation="20dp"
+            android:backgroundTint="@color/dark_green"
             android:textColor="@color/white"
-            android:layout_gravity="center" />
+            android:gravity="" />
     </LinearLayout>
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.R
 
@@ -36,6 +37,12 @@ class DailyForecastAdapter(private val dailyData: List<DailyWeather>) :
         holder.descriptionTextView.text = item.description
         holder.temperatureTextView.text = item.temperature
         holder.weatherIconImageView.setImageResource(item.iconResId)
+
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
+        holder.dayTextView.typeface = poppinsRegular
+        holder.descriptionTextView.typeface = poppinsRegular
+        holder.temperatureTextView.typeface = poppinsRegular
+
     }
 
     override fun getItemCount(): Int = dailyData.size

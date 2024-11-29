@@ -25,11 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:padding="4dp"
+        android:elevation="4dp"
         app:cnb_iconSize="20dp"
-        app:cnb_iconColor="@color/white"
+        app:cnb_iconColor="@color/dark_green"
         app:cnb_orientationMode="horizontal"
         app:cnb_radius="10dp"
-        app:cnb_unselectedColor="@color/white"
+        app:cnb_unselectedColor="@color/dark_green"
         app:cnb_menuResource="@menu/bottom_nav_menu"
         android:background="@drawable/bottom_nav_bg"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +38,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="15dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

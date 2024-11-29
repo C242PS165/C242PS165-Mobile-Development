@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/carouselFragment">
 
     <!-- Splash Fragment -->
     <fragment
@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_plantFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
+        <action
+            android:id="@+id/action_plantFragment_to_addPlantFragment"
+            app:destination="@id/addPlantFragment" />
     </fragment>
 
     <!-- Weather Fragment -->
@@ -90,5 +93,30 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/carouselFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.CarouselFragment"
+        android:label="CarouselFragment" >
+        <action
+            android:id="@+id/action_carouselFragment_to_onBoardFragment"
+            app:destination="@id/onBoardFragment"
+            app:popUpTo="@id/carouselFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_carouselFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/addPlantFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.AddPlantFragment"
+        android:label="fragment_add_plant"
+        tools:layout="@layout/fragment_add_plant" />
 </navigation>

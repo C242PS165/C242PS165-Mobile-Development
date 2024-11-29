@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.R
 
@@ -29,6 +30,12 @@ class HourlyForecastAdapter(private val hourlyData: List<HourlyWeather>) :
         holder.timeTextView.text = item.time
         holder.temperatureTextView.text = item.temperature
         holder.weatherIconImageView.setImageResource(item.iconResId)
+
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
+        holder.timeTextView.typeface = poppinsRegular
+        holder.temperatureTextView.typeface = poppinsRegular
+
+
     }
 
     override fun getItemCount(): Int = hourlyData.size
