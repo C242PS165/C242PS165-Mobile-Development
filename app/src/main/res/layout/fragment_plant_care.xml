@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Nama Tanaman -->
+    <TextView
+        android:id="@+id/textViewPlantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Tanaman"
+        android:textSize="18sp"
+        android:textColor="#2C3E50"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Kategori Tanaman -->
+    <TextView
+        android:id="@+id/textViewPlantCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategori"
+        android:textSize="16sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Deskripsi Tanaman -->
+    <TextView
+        android:id="@+id/textViewPlantDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi"
+        android:textSize="16sp"
+        android:textColor="#34495E"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Rekomendasi Perawatan -->
+    <TextView
+        android:id="@+id/textViewCareRecommendation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perawatan tanaman akan muncul di sini."
+        android:textSize="16sp"
+        android:textColor="#34495E" />
+
+</LinearLayout>

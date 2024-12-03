@@ -109,5 +109,11 @@
         android:id="@+id/addPlantFragment"
         android:name="com.tyas.smartfarm.view.pages.fragment.AddPlantFragment"
         android:label="fragment_add_plant"
-        tools:layout="@layout/fragment_add_plant" />
+        tools:layout="@layout/fragment_add_plant">
+
+        <!-- Tambahkan action untuk navigasi ke PlantFragment -->
+        <action
+            android:id="@+id/action_addPlantFragment_to_plantFragment"
+            app:destination="@id/plantFragment" />
+    </fragment>
 </navigation>
