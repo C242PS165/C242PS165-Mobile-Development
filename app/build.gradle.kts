@@ -66,6 +66,9 @@ dependencies {
 
     implementation(libs.circleindicator)
 
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
 
