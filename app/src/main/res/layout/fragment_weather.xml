@@ -178,6 +178,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <!-- Title for weather details -->
             <TextView
                 android:id="@+id/weather_details_title"
                 android:layout_width="wrap_content"
@@ -190,6 +191,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <!-- GridLayout for weather details -->
             <GridLayout
                 android:id="@+id/weather_details_grid"
                 android:layout_width="match_parent"
@@ -201,7 +203,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <!-- Card 1: Feels Like Temperature -->
+                <!-- Card 1: Cuaca + Suhu Rata-rata -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -216,12 +218,12 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_thermometer" />
+                        android:src="@drawable/ic_weather" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Terasa seperti"
+                        android:text="Cuaca + Suhu Rata-rata"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -229,47 +231,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="31°"
+                        android:text="27° - Cerah"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Card 2: Wind Speed -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:background="@drawable/card_background"
-                    android:padding="16dp"
-                    android:layout_gravity="fill"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_wind" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Angin U"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="14 km/j"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Card 3: Humidity -->
+                <!-- Card 2: Kelembapan Rata-rata -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -289,7 +257,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kelembapan"
+                        android:text="Kelembapan Rata-rata"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -303,7 +271,41 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Card 4: UV Index -->
+                <!-- Card 3: Curah Hujan -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="16dp"
+                    android:layout_gravity="fill"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_rain" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Curah Hujan"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20 mm"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Card 4: Durasi Sinar Matahari -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -323,7 +325,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UV"
+                        android:text="Durasi Sinar Matahari"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -331,13 +333,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="6 Sedang"
+                        android:text="8 Jam"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Card 5: Visibility -->
+                <!-- Card 5: Kecepatan Angin Rata-rata -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -347,17 +349,18 @@
                     android:background="@drawable/card_background"
                     android:padding="16dp"
                     android:layout_gravity="fill"
+                    android:layout_columnSpan="2"
                     android:gravity="center">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_visibility" />
+                        android:src="@drawable/ic_wind" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Visibilitas"
+                        android:text="Kecepatan Angin Rata-rata"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -365,41 +368,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14 km"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Card 6: Pressure -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:background="@drawable/card_background"
-                    android:padding="16dp"
-                    android:layout_gravity="fill"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_pressure" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tekanan udara"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1006 hPa"
+                        android:text="14 km/j"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
