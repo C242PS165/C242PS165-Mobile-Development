@@ -9,5 +9,6 @@ data class Plant(
     val name: String,
     val description: String,
     val category: String,
-    val plantDate: String
+    val plantDate: String,
+    val imageUri: String?
 )
