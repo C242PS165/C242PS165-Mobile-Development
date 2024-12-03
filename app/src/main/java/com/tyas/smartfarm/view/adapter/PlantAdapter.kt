@@ -1,41 +1,51 @@
 package com.tyas.smartfarm.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tyas.smartfarm.R
-import com.tyas.smartfarm.model.Plant
+import com.tyas.smartfarm.databinding.ItemPlantBinding
+import com.tyas.smartfarm.model.database.Plant
 
-class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<PlantAdapter.PlantViewHolder>() {
-
-    inner class PlantViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val plantImage: ImageView = view.findViewById(R.id.iv_plant_image)
-        val plantName: TextView = view.findViewById(R.id.tv_plant_name)
-        val plantStatus: TextView = view.findViewById(R.id.tv_plant_status)
-    }
+class PlantAdapter : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_plant, parent, false)
-        return PlantViewHolder(view)
+        val binding = ItemPlantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlantViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PlantViewHolder, position: Int) {
-        val plant = plants[position]
-        holder.plantImage.setImageResource(plant.imageResId)
-        holder.plantName.text = plant.name
-        holder.plantStatus.text = plant.status
-
-        val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
-        holder.plantName.typeface = poppinsBold
-
-        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
-        holder.plantStatus.typeface = poppinsRegular
-
+        val plant = getItem(position)
+        holder.bind(plant)
     }
 
-    override fun getItemCount(): Int = plants.size
+    inner class PlantViewHolder(private val binding: ItemPlantBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(plant: Plant) {
+            binding.tvPlantName.text = plant.name
+            binding.tvPlantStatus.text = plant.category
+
+            if (plant.imageUri != null) {
+                Glide.with(binding.ivPlantImage.context)
+                    .load(plant.imageUri)
+                    .into(binding.ivPlantImage)
+            } else {
+                binding.ivPlantImage.setImageResource(R.drawable.placeholder_image)
+            }
+        }
+    }
+}
+
+class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
+    override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+        return oldItem == newItem
+    }
 }
