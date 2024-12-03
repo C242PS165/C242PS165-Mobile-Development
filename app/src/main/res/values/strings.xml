@@ -33,4 +33,14 @@
     <string name="onboarding_image">onboarding image</string>
     <string name="title">title onboarding</string>
     <string name="desc">desc onboarding</string>
+
+    <!-- Array Kategori Tanaman -->
+    <string-array name="category_array">
+        <item>Tanaman Hias</item>
+        <item>Tanaman Obat</item>
+        <item>Tanaman Buah</item>
+        <item>Tanaman Sayur</item>
+        <item>Tanaman Paku</item>
+        <item>Tanaman Langka</item>
+    </string-array>
 </resources>
