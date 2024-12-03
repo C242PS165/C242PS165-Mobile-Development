@@ -88,7 +88,6 @@ class PlantFragment : Fragment() {
         // Add Plant Button Action
         binding.btnAddPlant.setOnClickListener {
             findNavController().navigate(R.id.action_plantFragment_to_addPlantFragment)
-            Toast.makeText(requireContext(), "Add Plant clicked!", Toast.LENGTH_SHORT).show()
         }
     }
     private fun getDummyPlants() = listOf(
