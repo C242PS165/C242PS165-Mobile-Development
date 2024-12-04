@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Pelawad"
+            android:text="@string/nama_daerah"
             android:textSize="34sp"
             android:textColor="@color/dark_green"
             android:layout_marginTop="16dp"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="27°"
+            android:text="@string/temperatur"
             android:textSize="48sp"
             android:layout_marginStart="16dp"
             android:textColor="@color/dark_green"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="Sebagian berawan"
+            android:text="@string/kondisi_cuaca"
             android:textSize="18sp"
             android:layout_marginStart="16dp"
             android:textColor="@color/dark_green"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="Kam 33° / 25°"
+            android:text="@string/waktu_dan_temperatur"
             android:textSize="14sp"
             android:layout_marginStart="16dp"
             android:textColor="@color/dark_green"
@@ -77,7 +77,7 @@
             android:id="@+id/air_quality_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kualitas udara: 155 - Tidak Sehat"
+            android:text="@string/kualitas_udara"
             android:fontFamily="@font/poppins_regular"
             android:textSize="14sp"
             android:layout_marginStart="16dp"
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Suhu Besok Terasa Seperti"
+                android:text="@string/suhu_besok"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white" />
@@ -133,7 +133,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kelembapan membuat suhu tinggi terasa seperti 104°F"
+                android:text="@string/kelembapan_suhu"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="14sp"
                 android:textColor="@android:color/white"
@@ -216,7 +216,7 @@
                 android:id="@+id/weather_details_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rincian Cuaca"
+                android:text="@string/rincian_cuaca"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -247,7 +247,7 @@
                     android:layout_gravity="fill"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_thermometer" />
@@ -255,7 +255,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Terasa seperti"
+                        android:text="@string/rincian_suhu1"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -263,7 +263,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="31°"
+                        android:text="@string/rincian_suhu2"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
@@ -281,7 +281,7 @@
                     android:layout_gravity="fill"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_wind" />
@@ -289,7 +289,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Angin U"
+                        android:text="@string/rincian_angin1"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -297,7 +297,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14 km/j"
+                        android:text="@string/rincian_angin2"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
@@ -315,7 +315,7 @@
                     android:layout_gravity="fill"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_humidity" />
@@ -323,7 +323,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kelembapan"
+                        android:text="@string/rincian_kelembapan1"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -331,7 +331,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="82%"
+                        android:text="@string/rincian_kelembapan2"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
@@ -349,7 +349,7 @@
                     android:layout_gravity="fill"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_uv" />
@@ -357,7 +357,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UV"
+                        android:text="@string/rincian_uv1"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -365,7 +365,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="6 Sedang"
+                        android:text="@string/rincian_uv2"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
@@ -383,7 +383,7 @@
                     android:layout_gravity="fill"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_visibility" />
@@ -391,7 +391,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Visibilitas"
+                        android:text="@string/rincian_visibiltas1"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -399,7 +399,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14 km"
+                        android:text="@string/rincian_visibiltas2"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
@@ -417,7 +417,7 @@
                     android:layout_gravity="fill"
                     android:gravity="center">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_pressure" />
@@ -425,7 +425,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tekanan udara"
+                        android:text="@string/rincian_tekanan_udara1"
                         android:textSize="14sp"
                         android:textColor="@android:color/white"
                         android:layout_marginTop="8dp" />
@@ -433,7 +433,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1006 hPa"
+                        android:text="@string/rincian_tekanan_udara2"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />

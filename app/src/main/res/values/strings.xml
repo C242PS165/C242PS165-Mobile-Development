@@ -33,6 +33,26 @@
     <string name="onboarding_image">onboarding image</string>
     <string name="title">title onboarding</string>
     <string name="desc">desc onboarding</string>
+    <string name="nama_daerah">Cilegon</string>
+    <string name="temperatur">27°</string>
+    <string name="kondisi_cuaca">Sebagian berawan</string>
+    <string name="waktu_dan_temperatur">Kam 33° / 25°</string>
+    <string name="kualitas_udara">Kualitas udara: 155 - Tidak Sehat</string>
+    <string name="suhu_besok">Suhu Besok Terasa Seperti</string>
+    <string name="kelembapan_suhu">Kelembapan membuat suhu tinggi terasa seperti 104°F</string>
+    <string name="rincian_cuaca">Rincian Cuaca</string>
+    <string name="rincian_suhu1">Terasa seperti</string>
+    <string name="rincian_suhu2">31°</string>
+    <string name="rincian_angin1">Angin U</string>
+    <string name="rincian_angin2">14 km/j</string>
+    <string name="rincian_kelembapan1">Kelembapan</string>
+    <string name="rincian_kelembapan2">82%</string>
+    <string name="rincian_uv1">UV</string>
+    <string name="rincian_uv2">6 Sedang</string>
+    <string name="rincian_visibiltas1">Visibilitas</string>
+    <string name="rincian_visibiltas2">14 km</string>
+    <string name="rincian_tekanan_udara1">Tekanan udara</string>
+    <string name="rincian_tekanan_udara2">1006 hPa</string>
 
     <!-- Array Kategori Tanaman -->
     <string-array name="category_array">
