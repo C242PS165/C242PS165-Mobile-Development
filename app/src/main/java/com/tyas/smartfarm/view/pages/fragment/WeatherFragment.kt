@@ -12,6 +12,8 @@ import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentWeatherBinding
 import com.tyas.smartfarm.view.adapter.DailyForecastAdapter
 import com.tyas.smartfarm.view.adapter.DailyWeather
+import com.tyas.smartfarm.view.adapter.HourlyForecastAdapter
+import com.tyas.smartfarm.view.adapter.HourlyWeather
 import com.tyas.smartfarm.view.pages.viewmodel.WeatherViewModel
 
 class WeatherFragment : Fragment() {
@@ -30,7 +32,26 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observasi LiveData dari ViewModel
+        // Data statis untuk Hourly Forecast
+        val hourlyData = listOf(
+            HourlyWeather("12:00", "27°", R.drawable.ic_cloudy),
+            HourlyWeather("13:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("14:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("15:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("16:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("17:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("18:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("19:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("20:00", "26°", R.drawable.ic_cloudy),
+            HourlyWeather("21:00", "26°", R.drawable.ic_cloudy)
+        )
+
+        // Adapter untuk Hourly Forecast
+        val hourlyAdapter = HourlyForecastAdapter(hourlyData)
+        binding.hourlyForecastRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.hourlyForecastRecycler.adapter = hourlyAdapter
+
+        // Observasi LiveData dari ViewModel untuk Daily Forecast
         weatherViewModel.weatherData.observe(viewLifecycleOwner) { data ->
             val dailyAdapter = DailyForecastAdapter(data.map {
                 DailyWeather(it.datetime, it.weather_desc, "${it.temperature}°", R.drawable.ic_cloudy)
@@ -39,17 +60,19 @@ class WeatherFragment : Fragment() {
             binding.dailyForecastRecycler.adapter = dailyAdapter
         }
 
+        // Observasi status loading
         weatherViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
+        // Menangani pesan error
         weatherViewModel.errorMessage.observe(viewLifecycleOwner) { message ->
             if (message != null) {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Panggil data cuaca
+        // Memanggil data cuaca
         weatherViewModel.fetchWeatherData()
     }
 
