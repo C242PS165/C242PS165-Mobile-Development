@@ -1,10 +1,7 @@
 package com.tyas.smartfarm.view.pages.fragment
 
-import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentAddPlantBinding
 import com.tyas.smartfarm.model.database.Plant
@@ -24,8 +20,6 @@ class AddPlantFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPlantBinding
     private lateinit var plantViewModel: PlantViewModel
-
-    private val pickImageRequestCode = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,10 +43,6 @@ class AddPlantFragment : Fragment() {
             savePlantData()
         }
 
-        binding.btnUploadImage.setOnClickListener {
-            openGalleryForImage()
-        }
-
         return binding.root
     }
 
@@ -74,51 +64,32 @@ class AddPlantFragment : Fragment() {
         datePickerDialog.show()
     }
 
-    private fun openGalleryForImage() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "image/*"
-        startActivityForResult(intent, pickImageRequestCode)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK && requestCode == pickImageRequestCode) {
-            val imageUri = data?.data
-            if (imageUri != null) {
-                Glide.with(this)
-                    .load(imageUri)
-                    .into(binding.ivPlantImage)
-
-                binding.ivPlantImage.tag = imageUri.toString()
-            }
-        }
-    }
-
     private fun savePlantData() {
         val plantName = binding.etPlantName.text.toString()
         val description = binding.etDescription.text.toString()
         val category = binding.spinnerCategory.selectedItem.toString()
         val plantDate = binding.etDate.text.toString()
-        val imageUri = binding.ivPlantImage.tag?.toString()
 
+        // Validasi form
         if (plantName.isEmpty() || description.isEmpty() || plantDate.isEmpty()) {
             Toast.makeText(requireContext(), "Semua field harus diisi!", Toast.LENGTH_SHORT).show()
             return
         }
 
+        // Membuat objek tanaman tanpa gambar
         val newPlant = Plant(
             name = plantName,
             description = description,
             category = category,
-            plantDate = plantDate,
-            imageUri = imageUri
+            plantingDate = plantDate
         )
 
+        // Menyimpan data tanaman ke Firebase Realtime Database
         plantViewModel.insertPlant(newPlant)
 
-        Toast.makeText(requireContext(), "Tanaman Berhasil dibuat!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Tanaman berhasil disimpan ke Firebase!", Toast.LENGTH_SHORT).show()
 
+        // Navigasi kembali ke halaman PlantFragment setelah sukses
         findNavController().navigate(R.id.action_addPlantFragment_to_plantFragment)
     }
 }

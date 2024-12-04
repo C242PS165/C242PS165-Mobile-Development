@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentPlantBinding
@@ -19,6 +18,7 @@ import com.tyas.smartfarm.model.Article
 import com.tyas.smartfarm.view.adapter.ArticleAdapter
 import com.tyas.smartfarm.view.adapter.PlantAdapter
 import com.tyas.smartfarm.view.pages.viewmodel.PlantViewModel
+import androidx.navigation.fragment.findNavController
 
 class PlantFragment : Fragment() {
 
@@ -50,7 +50,6 @@ class PlantFragment : Fragment() {
 
         if (isFirstLogin) {
             showFarmerDialog()
-
             sharedPreferences.edit().putBoolean("isFirstLogin", false).apply()
         }
 
@@ -62,16 +61,32 @@ class PlantFragment : Fragment() {
 
         binding.tvBroadcastMessage.text = "Check your plants! The forecast says rain tomorrow."
 
+        // Initialize ViewModel
         plantViewModel = ViewModelProvider(this).get(PlantViewModel::class.java)
 
+        // Initialize Adapter
         plantAdapter = PlantAdapter()
         binding.rvPlants.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = plantAdapter
         }
 
-        plantViewModel.getAllPlants().observe(viewLifecycleOwner, { plants ->
-            plantAdapter.submitList(plants)
+        // Observe plant list
+        plantViewModel.plantList.observe(viewLifecycleOwner, { plants ->
+            if (plants.isNotEmpty()) {
+                plantAdapter.submitList(plants) // no need to convert to MutableList anymore
+            } else {
+                binding.tvBroadcastMessage.text = "No plants found."
+            }
+        })
+
+        // Handle loading state
+        plantViewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
+            if (isLoading) {
+                binding.tvBroadcastMessage.text = "Loading plants..."
+            } else {
+                binding.tvBroadcastMessage.text = "Check your plants! The forecast says rain tomorrow."
+            }
         })
 
         // Initialize Article RecyclerView
@@ -81,6 +96,7 @@ class PlantFragment : Fragment() {
             adapter = articleAdapter
         }
 
+        // Navigate to AddPlant page
         binding.btnAddPlant.setOnClickListener {
             findNavController().navigate(R.id.action_plantFragment_to_addPlantFragment)
         }
