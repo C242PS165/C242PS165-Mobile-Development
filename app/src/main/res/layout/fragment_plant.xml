@@ -33,28 +33,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- ProgressBar untuk menunjukkan loading -->
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            android:indeterminate="true"
-            app:layout_constraintTop_toBottomOf="@id/tv_monitor_your_plants"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <!-- Plant Cards -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_plants"
+        <!-- Plant Cards Section (ProgressBar and RecyclerView) -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_plants_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/progressBar"
+            app:layout_constraintTop_toBottomOf="@id/tv_monitor_your_plants"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:paddingBottom="8dp" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- ProgressBar untuk menunjukkan loading -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:indeterminate="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- RecyclerView untuk daftar tanaman -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_plants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintTop_toBottomOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Broadcast Section -->
         <TextView
@@ -65,7 +75,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_bold"
-            app:layout_constraintTop_toBottomOf="@id/rv_plants"
+            app:layout_constraintTop_toBottomOf="@id/cl_plants_section"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp" />
 
