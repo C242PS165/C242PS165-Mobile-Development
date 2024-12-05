@@ -17,28 +17,64 @@
         <ImageView
             android:id="@+id/iv_article_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop" />
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Plant Image" />
 
-        <!-- Text and Button Section -->
+        <!-- Text and Info Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Article Title -->
+            <!-- Tanaman Name (Common Name) -->
             <TextView
-                android:id="@+id/tv_article_title"
-                android:layout_width="0dp"
+                android:id="@+id/tv_plant_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Judul"
+                android:text="European Silver Fir"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/dark_green" />
 
-            <!-- Look Button -->
+            <!-- Scientific Name -->
+            <TextView
+                android:id="@+id/tv_scientific_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Abies alba"
+                android:textSize="14sp"
+                android:textColor="@color/gainsboro" />
+
+            <!-- Life Cycle (Perennial/Annual) -->
+            <TextView
+                android:id="@+id/tv_life_cycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Siklus Hidup: Perennial"
+                android:textSize="14sp"
+                android:textColor="@color/gainsboro" />
+
+            <!-- Watering Information -->
+            <TextView
+                android:id="@+id/tv_watering"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Perawatan: Frequent watering"
+                android:textSize="14sp"
+                android:textColor="@color/gainsboro" />
+
+            <!-- Sunlight Information -->
+            <TextView
+                android:id="@+id/tv_sunlight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cahaya: Full Sun"
+                android:textSize="14sp"
+                android:textColor="@color/gainsboro" />
+
+            <!-- Button to open more details -->
             <Button
                 android:id="@+id/btn_look"
                 android:layout_width="wrap_content"

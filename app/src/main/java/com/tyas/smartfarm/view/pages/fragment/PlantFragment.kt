@@ -2,6 +2,7 @@ package com.tyas.smartfarm.view.pages.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentPlantBinding
@@ -18,7 +21,10 @@ import com.tyas.smartfarm.model.Article
 import com.tyas.smartfarm.view.adapter.ArticleAdapter
 import com.tyas.smartfarm.view.adapter.PlantAdapter
 import com.tyas.smartfarm.view.pages.viewmodel.PlantViewModel
-import androidx.navigation.fragment.findNavController
+import com.tyas.smartfarm.api.ArticleApiService
+import com.tyas.smartfarm.api.ApiClient
+import kotlinx.coroutines.launch
+import retrofit2.await
 
 class PlantFragment : Fragment() {
 
@@ -28,6 +34,7 @@ class PlantFragment : Fragment() {
     private lateinit var plantAdapter: PlantAdapter
     private lateinit var articleAdapter: ArticleAdapter
     private lateinit var plantViewModel: PlantViewModel
+    private lateinit var articleApiService: ArticleApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,20 +68,17 @@ class PlantFragment : Fragment() {
 
         binding.tvBroadcastMessage.text = "Check your plants! The forecast says rain tomorrow."
 
-        // Initialize ViewModel
         plantViewModel = ViewModelProvider(this).get(PlantViewModel::class.java)
 
-        // Initialize Adapter
         plantAdapter = PlantAdapter()
         binding.rvPlants.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = plantAdapter
         }
 
-        // Observe plant list
         plantViewModel.plantList.observe(viewLifecycleOwner, { plants ->
             if (plants.isNotEmpty()) {
-                plantAdapter.submitList(plants) // no need to convert to MutableList anymore
+                plantAdapter.submitList(plants)
             } else {
                 binding.tvBroadcastMessage.text = "No plants found."
             }
@@ -89,25 +93,61 @@ class PlantFragment : Fragment() {
             }
         })
 
-        // Initialize Article RecyclerView
-        articleAdapter = ArticleAdapter(getDummyArticles())
+        articleAdapter = ArticleAdapter(emptyList())
         binding.rvArticles.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = articleAdapter
         }
 
-        // Navigate to AddPlant page
+        articleApiService = ApiClient.articleApiService
+        fetchArticles()
+
         binding.btnAddPlant.setOnClickListener {
             findNavController().navigate(R.id.action_plantFragment_to_addPlantFragment)
         }
     }
 
-    private fun getDummyArticles() = listOf(
-        Article("Article 1", "This is a description", R.drawable.article_dummy),
-        Article("Article 2", "This is another description", R.drawable.dummy),
-        Article("Article 3", "Description for article", R.drawable.dummy),
-        Article("Article 4", "More details on articles", R.drawable.dummy)
-    )
+    private fun fetchArticles() {
+        lifecycleScope.launch {
+            try {
+                val apiKey = "sk-f78d6751878343fd87895"
+                val response = articleApiService.getPlantArticles(apiKey).await()
+
+                // Log respons API untuk memverifikasi data yang diterima
+                Log.d("Article Data", "Received Response: $response")
+
+                val articles = response.data.map { articleData ->
+                    // Log artikel yang sedang diproses
+                    Log.d("Article Data", "Mapping Article: $articleData")
+
+                    // Menangani null atau ketidaksesuaian tipe pada sunlight
+                    val sunlightList = articleData.sunlight?.filterIsInstance<String>() ?: listOf("Pencahayaan Tidak Diketahui")
+
+                    // Menangani null pada defaultImage
+                    val imageUrl = articleData.defaultImage?.regularUrl ?: "URL Gambar Tidak Diketahui"
+
+                    // Membuat objek Article dengan data yang telah dipetakan
+                    Article(
+                        id = articleData.id,
+                        commonName = articleData.commonName ?: "Nama Tanaman Tidak Diketahui",
+                        scientificName = articleData.scientificName ?: listOf("Nama Ilmiah Tidak Diketahui"),
+                        otherName = articleData.otherName ?: listOf("Nama Lain Tidak Diketahui"),
+                        cycle = articleData.cycle ?: "Siklus Tidak Diketahui",
+                        watering = articleData.watering ?: "Penyiraman Tidak Diketahui",
+                        sunlight = sunlightList, // Memastikan List<String>
+                        defaultImage = articleData.defaultImage // Memastikan defaultImage tidak null
+                    )
+                }
+
+                // Mengupdate adapter dengan data artikel
+                articleAdapter.setArticles(articles)
+            } catch (e: Exception) {
+                // Menangani error jika ada masalah
+                Toast.makeText(requireContext(), "Failed to load articles: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Article Data", "Error fetching articles: ${e.message}", e)
+            }
+        }
+    }
 
     private fun showFarmerDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_custom_farmer, null)

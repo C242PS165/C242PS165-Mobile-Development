@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.databinding.ItemPlantBinding
-import com.tyas.smartfarm.model.database.Plant
+import com.tyas.smartfarm.model.Plant
 
 class PlantAdapter : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
 

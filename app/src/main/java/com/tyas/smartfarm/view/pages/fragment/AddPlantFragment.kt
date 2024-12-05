@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentAddPlantBinding
-import com.tyas.smartfarm.model.database.Plant
+import com.tyas.smartfarm.model.Plant
 import com.tyas.smartfarm.view.pages.viewmodel.PlantViewModel
 import java.util.Calendar
 

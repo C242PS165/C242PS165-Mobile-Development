@@ -1,4 +1,4 @@
-package com.tyas.smartfarm.model.database
+package com.tyas.smartfarm.model
 
 data class Plant(
     val id: String = "",

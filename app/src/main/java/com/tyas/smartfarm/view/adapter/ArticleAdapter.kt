@@ -5,17 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.model.Article
 
-class ArticleAdapter(private val articles: List<Article>) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
+class ArticleAdapter(private var articles: List<Article>) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val articleImage: ImageView = view.findViewById(R.id.iv_article_image)
-        val articleTitle: TextView = view.findViewById(R.id.tv_article_title)
-        //val articleDescription: TextView = view.findViewById(R.id.tv_article_description)
+        val articleTitle: TextView = view.findViewById(R.id.tv_plant_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -25,17 +24,18 @@ class ArticleAdapter(private val articles: List<Article>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = articles[position]
-        holder.articleImage.setImageResource(article.imageResId)
-        holder.articleTitle.text = article.title
-        //holder.articleDescription.text = article.description
 
-        val poppinsBold = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_bold)
-        holder.articleTitle.typeface = poppinsBold
+        holder.articleTitle.text = article.commonName ?: "Nama Tanaman Tidak Diketahui"
 
-        val poppinsReguler = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
-        //holder.articleDescription.typeface = poppinsReguler
-
+        Glide.with(holder.itemView.context)
+            .load(article.defaultImage?.mediumUrl ?: R.drawable.placeholder_image)
+            .into(holder.articleImage)
     }
 
     override fun getItemCount(): Int = articles.size
+
+    fun setArticles(newArticles: List<Article>) {
+        articles = newArticles
+        notifyDataSetChanged()
+    }
 }
