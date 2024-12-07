@@ -51,14 +51,22 @@ class WeatherFragment : Fragment() {
         binding.hourlyForecastRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.hourlyForecastRecycler.adapter = hourlyAdapter
 
+
+
         // Observasi LiveData dari ViewModel untuk Daily Forecast
         weatherViewModel.weatherData.observe(viewLifecycleOwner) { data ->
             val dailyAdapter = DailyForecastAdapter(data.map {
-                DailyWeather(it.datetime, it.weather_desc, "${it.temperature}°", R.drawable.ic_cloudy)
+                DailyWeather(
+                    it.datetime,
+                    it.weather_desc,
+                    "${it.temperature}°",
+                    getWeatherIcon(it.weather_desc) // Gunakan fungsi untuk mendapatkan ikon
+                )
             })
             binding.dailyForecastRecycler.layoutManager = LinearLayoutManager(requireContext())
             binding.dailyForecastRecycler.adapter = dailyAdapter
         }
+
 
         // Observasi status loading
         weatherViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -74,6 +82,20 @@ class WeatherFragment : Fragment() {
 
         // Memanggil data cuaca
         weatherViewModel.fetchWeatherData()
+    }
+
+    // Fungsi untuk memetakan deskripsi cuaca ke ikon
+    private fun getWeatherIcon(weatherDesc: String?): Int {
+        return when (weatherDesc?.lowercase()) {
+            "berawan" -> R.drawable.ic_cloudy
+            "petir" -> R.drawable.ic_thunderstorm
+            "hujan ringan" -> R.drawable.ic_light_rain
+            "hujan petir" -> R.drawable.ic_rain_thunderstorm
+            "cerah berawan" -> R.drawable.ic_partly_cloudy
+            "cerah" -> R.drawable.ic_sunny
+            "udara kabur" -> R.drawable.ic_hazy
+            else -> R.drawable.placeholder_image // Default icon jika deskripsi tidak cocok
+        }
     }
 
     override fun onDestroyView() {
