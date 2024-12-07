@@ -1,5 +1,6 @@
 package com.tyas.smartfarm.view.pages.fragment
 
+import WeatherViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,6 @@ import com.tyas.smartfarm.view.adapter.DailyForecastAdapter
 import com.tyas.smartfarm.view.adapter.DailyWeather
 import com.tyas.smartfarm.view.adapter.HourlyForecastAdapter
 import com.tyas.smartfarm.view.adapter.HourlyWeather
-import com.tyas.smartfarm.view.pages.viewmodel.WeatherViewModel
 
 class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null
@@ -53,20 +53,42 @@ class WeatherFragment : Fragment() {
 
 
 
-        // Observasi LiveData dari ViewModel untuk Daily Forecast
+        // Observasi data dari ViewModel
+        weatherViewModel.location.observe(viewLifecycleOwner) { location ->
+            binding.locationText.text = location
+        }
+
+        weatherViewModel.currentTemperature.observe(viewLifecycleOwner) { temp ->
+            binding.temperatureText.text = temp
+        }
+
+        weatherViewModel.weatherCondition.observe(viewLifecycleOwner) { condition ->
+            binding.weatherConditionText.text = condition
+        }
+
+        weatherViewModel.airQuality.observe(viewLifecycleOwner) { airQuality ->
+            val airQualityIndex = getAirQualityIndexLabel(airQuality) // Mendapatkan label AQI
+            binding.airQualityText.text = "Kualitas Udara: $airQuality ($airQualityIndex)"
+        }
+
+
+        weatherViewModel.weatherIcon.observe(viewLifecycleOwner) { iconResId ->
+            binding.weatherIcon.setImageResource(iconResId)
+        }
+
+        // Observasi data harian
         weatherViewModel.weatherData.observe(viewLifecycleOwner) { data ->
             val dailyAdapter = DailyForecastAdapter(data.map {
                 DailyWeather(
                     it.datetime,
                     it.weather_desc,
                     "${it.temperature}°",
-                    getWeatherIcon(it.weather_desc) // Gunakan fungsi untuk mendapatkan ikon
+                    weatherViewModel.getWeatherIcon(it.weather_desc) // Panggil fungsi dari ViewModel
                 )
             })
             binding.dailyForecastRecycler.layoutManager = LinearLayoutManager(requireContext())
             binding.dailyForecastRecycler.adapter = dailyAdapter
         }
-
 
         // Observasi status loading
         weatherViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -80,23 +102,21 @@ class WeatherFragment : Fragment() {
             }
         }
 
-        // Memanggil data cuaca
+        // Panggil data cuaca
         weatherViewModel.fetchWeatherData()
     }
 
-    // Fungsi untuk memetakan deskripsi cuaca ke ikon
-    private fun getWeatherIcon(weatherDesc: String?): Int {
-        return when (weatherDesc?.lowercase()) {
-            "berawan" -> R.drawable.ic_cloudy
-            "petir" -> R.drawable.ic_thunderstorm
-            "hujan ringan" -> R.drawable.ic_light_rain
-            "hujan petir" -> R.drawable.ic_rain_thunderstorm
-            "cerah berawan" -> R.drawable.ic_partly_cloudy
-            "cerah" -> R.drawable.ic_sunny
-            "udara kabur" -> R.drawable.ic_hazy
-            else -> R.drawable.placeholder_image // Default icon jika deskripsi tidak cocok
+    private fun getAirQualityIndexLabel(airQuality: Int): String {
+        return when (airQuality) {
+            in 0..50 -> "Baik"
+            in 51..100 -> "Sedang"
+            in 101..150 -> "Tidak Sehat bagi Kelompok Sensitif"
+            in 151..200 -> "Tidak Sehat"
+            in 201..300 -> "Sangat Tidak Sehat"
+            else -> "Berbahaya"
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
