@@ -3,12 +3,16 @@ package com.tyas.smartfarm.view.pages.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.content.Context
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.api.ApiClient
 import com.tyas.smartfarm.model.WeatherData
 import kotlinx.coroutines.launch
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 
-class WeatherViewModel : ViewModel() {
+class WeatherViewModel(application: Application) : AndroidViewModel(application) {
+
     // LiveData yang sudah ada
     val weatherData = MutableLiveData<List<WeatherData>>()
     val isLoading = MutableLiveData<Boolean>()
@@ -20,6 +24,7 @@ class WeatherViewModel : ViewModel() {
     val weatherCondition = MutableLiveData<String>() // Deskripsi cuaca
     val airQuality = MutableLiveData<Int>() // Kualitas udara
     val weatherIcon = MutableLiveData<Int>() // Ikon cuaca
+    val weatherMessage = MutableLiveData<String>()
 
     fun fetchWeatherData() {
         viewModelScope.launch {
@@ -39,6 +44,9 @@ class WeatherViewModel : ViewModel() {
 
                         // Tetapkan ikon berdasarkan deskripsi cuaca
                         weatherIcon.value = getWeatherIcon(it.weather_desc)
+
+                        // Tetapkan pesan berdasarkan kondisi cuaca
+                        weatherMessage.value = generateWeatherMessage(it.weather_desc)
                     }
                 } else {
                     errorMessage.value = "Gagal memuat data cuaca"
@@ -50,6 +58,23 @@ class WeatherViewModel : ViewModel() {
             }
         }
     }
+
+    private fun generateWeatherMessage(weatherDesc: String?): String {
+        val context = getApplication<Application>()
+        return when (weatherDesc?.lowercase()) {
+            "berawan" -> context.getString(R.string.weather_message_cloudy)
+            "petir" -> context.getString(R.string.weather_message_thunderstorm)
+            "hujan ringan" -> context.getString(R.string.weather_message_light_rain)
+            "hujan petir" -> context.getString(R.string.weather_message_rain_thunderstorm)
+            "cerah berawan" -> context.getString(R.string.weather_message_partly_cloudy)
+            "cerah" -> context.getString(R.string.weather_message_sunny)
+            "udara kabur" -> context.getString(R.string.weather_message_hazy)
+            else -> context.getString(R.string.weather_message_unknown)
+        }
+    }
+
+
+
 
     // Fungsi untuk memetakan deskripsi cuaca ke ikon
     fun getWeatherIcon(weatherDesc: String?): Int {
@@ -64,5 +89,6 @@ class WeatherViewModel : ViewModel() {
             else -> R.drawable.placeholder_image // Default icon jika deskripsi tidak cocok
         }
     }
+
 
 }

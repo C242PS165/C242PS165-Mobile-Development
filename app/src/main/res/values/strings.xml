@@ -25,11 +25,11 @@
     <string name="si_sahabat_petani">Farmer\'s Friend</string>
     <string name="let_s_start">Let\'s Start</string>
 
-    <string name="nama_daerah" translatable="false">Cilegon</string>
-    <string name="temperatur" translatable="false">27°</string>
-    <string name="kondisi_cuaca" translatable="false">Sebagian berawan</string>
+    <string name="nama_daerah" translatable="false">Province</string>
+    <string name="temperatur" translatable="false">-°</string>
+    <string name="kondisi_cuaca" translatable="false">Conditions</string>
     <string name="waktu_dan_temperatur" translatable="false">Kam 33° / 25°</string>
-    <string name="kualitas_udara" translatable="false">Kualitas udara: 155 - Tidak Sehat</string>
+    <string name="kualitas_udara" translatable="false">Air Quality</string>
     <string name="suhu_besok" translatable="false">Suhu Besok Terasa Seperti</string>
     <string name="kelembapan_suhu" translatable="false">Kelembapan membuat suhu tinggi terasa seperti 104°F</string>
     <string name="rincian_cuaca" translatable="false">Rincian Cuaca</string>
@@ -55,6 +55,29 @@
     <string name="logout">Logout</string>
     <string name="change_language">Change Language</string>
     <string name="notifications">Notifications</string>
+    <string name="weather_message_cloudy">Cloudy skies, perhaps a good time to garden in the shade!</string>
+    <string name="weather_message_thunderstorm">Be careful, there’s a thunderstorm. Stay indoors and stay safe!</string>
+    <string name="weather_message_light_rain">Light rain, make sure your plants don’t get too wet!</string>
+    <string name="weather_message_rain_thunderstorm">Bad weather with thunderstorms. Don’t forget to stay safe!</string>
+    <string name="weather_message_partly_cloudy">Partly cloudy, perfect weather for outdoor activities!</string>
+    <string name="weather_message_sunny">Yay! Sunny weather, perfect for gardening in the park!</string>
+    <string name="weather_message_hazy">Hazy skies, make sure to maintain your health while outdoors.</string>
+    <string name="weather_message_unknown">Unknown weather, always check the surroundings before engaging in activities!</string>
+    <string name="weather_desc_cloudy">cloudy</string>
+    <string name="weather_desc_thunderstorm">thunderstorm</string>
+    <string name="weather_desc_light_rain">light rain</string>
+    <string name="weather_desc_rain_thunderstorm">rain thunderstorm</string>
+    <string name="weather_desc_partly_cloudy">partly cloudy</string>
+    <string name="weather_desc_sunny">sunny</string>
+    <string name="weather_desc_hazy">hazy</string>
+    <string name="weather_desc_unknown">unknown</string>
+    <string name="air_quality_good">Good</string>
+    <string name="air_quality_moderate">Moderate</string>
+    <string name="air_quality_unhealthy_sensitive">Unhealthy for Sensitive Groups</string>
+    <string name="air_quality_unhealthy">Unhealthy</string>
+    <string name="air_quality_very_unhealthy">Very Unhealthy</string>
+    <string name="air_quality_hazardous">Hazardous</string>
+
 
     <!-- Array Kategori Tanaman -->
     <string-array name="category_array">

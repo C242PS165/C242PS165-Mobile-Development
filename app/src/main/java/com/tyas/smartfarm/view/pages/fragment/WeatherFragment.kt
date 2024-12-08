@@ -90,6 +90,11 @@ class WeatherFragment : Fragment() {
             binding.dailyForecastRecycler.adapter = dailyAdapter
         }
 
+        // Observasi pesan cuaca
+        weatherViewModel.weatherMessage.observe(viewLifecycleOwner) { message ->
+            binding.weatherMessageText.text = message
+        }
+
         // Observasi status loading
         weatherViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
@@ -108,14 +113,15 @@ class WeatherFragment : Fragment() {
 
     private fun getAirQualityIndexLabel(airQuality: Int): String {
         return when (airQuality) {
-            in 0..50 -> "Baik"
-            in 51..100 -> "Sedang"
-            in 101..150 -> "Tidak Sehat bagi Kelompok Sensitif"
-            in 151..200 -> "Tidak Sehat"
-            in 201..300 -> "Sangat Tidak Sehat"
-            else -> "Berbahaya"
+            in 0..50 -> getString(R.string.air_quality_good)
+            in 51..100 -> getString(R.string.air_quality_moderate)
+            in 101..150 -> getString(R.string.air_quality_unhealthy_sensitive)
+            in 151..200 -> getString(R.string.air_quality_unhealthy)
+            in 201..300 -> getString(R.string.air_quality_very_unhealthy)
+            else -> getString(R.string.air_quality_hazardous)
         }
     }
+
 
 
     override fun onDestroyView() {
