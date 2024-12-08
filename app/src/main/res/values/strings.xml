@@ -1,66 +1,68 @@
 <resources>
     <string name="app_name">SmartFarm</string>
     <string name="hello_blank_fragment">Hello World</string>
-    <string name="cuaca">Cuaca</string>
-    <string name="tanaman">Tanaman</string>
+    <string name="cuaca">Weather</string>
+    <string name="tanaman">Plant</string>
     <string name="profile">Profile</string>
-    <string name="format_email">Format email salah.</string>
-    <string name="minimal_pw">Minimal password adalah 8 karakter.</string>
-    <string name="contoh_gmail_com">contoh@gmail.com</string>
+    <string name="format_email">Incorrect email format.</string>
+    <string name="minimal_pw">Minimum password is 8 characters.</string>
+    <string name="contoh_gmail_com">example@gmail.com</string>
     <string name="username">Username</string>
     <string name="farmer_icon">Farmer Icon</string>
-    <string name="logout_berhasil">Logout berhasil!</string>
+    <string name="logout_berhasil">Logout Success!</string>
     <string name="welcome_back">Welcome Back!</string>
-    <string name="please_login">Please, login with your registered account</string>
+    <string name="please_login">Please login with your registered account</string>
     <string name="password">Password</string>
-    <string name="tampilkan_password">Tampilkan Password</string>
+    <string name="tampilkan_password">Show the Password</string>
     <string name="login">Login</string>
-    <string name="tv_question">Kamu belum memiliki akun?</string>
-    <string name="daftar">Daftar</string>
+    <string name="tv_question">Doesn\'t have an account?</string>
+    <string name="daftar">Sign Up</string>
     <string name="sign_up">Sign Up</string>
     <string name="create_account">Create your new account</string>
-    <string name="tv_question2">Kamu sudah memiliki akun?</string>
-    <string name="splash_logo">Splash Logo</string>
-    <string name="smartfarm">SmartFarm</string>
-    <string name="si_sahabat_petani">sahabat petani</string>
+    <string name="tv_question2">Already have an account?</string>
+    <string name="splash_logo" translatable="false">Splash Logo</string>
+    <string name="smartfarm" translatable="false">SmartFarm</string>
+    <string name="si_sahabat_petani">Farmer\'s Friend</string>
     <string name="let_s_start">Let\'s Start</string>
 
-    <!-- Onboarding Text -->
-    <string name="subtitle_onboarding1">We are here to help you</string>
-    <string name="subtitle_onboarding2">too see latest  weather</string>
-    <string name="subtitle_onboarding3">Planting advice/planting procedures</string>
-    <string name="next">Continue</string>
-    <string name="onboarding_image">onboarding image</string>
-    <string name="title">title onboarding</string>
-    <string name="desc">desc onboarding</string>
-    <string name="nama_daerah">Cilegon</string>
-    <string name="temperatur">27°</string>
-    <string name="kondisi_cuaca">Sebagian berawan</string>
-    <string name="waktu_dan_temperatur">Kam 33° / 25°</string>
-    <string name="kualitas_udara">Kualitas udara: 155 - Tidak Sehat</string>
-    <string name="suhu_besok">Suhu Besok Terasa Seperti</string>
-    <string name="kelembapan_suhu">Kelembapan membuat suhu tinggi terasa seperti 104°F</string>
-    <string name="rincian_cuaca">Rincian Cuaca</string>
-    <string name="rincian_suhu1">Terasa seperti</string>
-    <string name="rincian_suhu2">31°</string>
-    <string name="rincian_angin1">Angin U</string>
-    <string name="rincian_angin2">14 km/j</string>
-    <string name="rincian_kelembapan1">Kelembapan</string>
-    <string name="rincian_kelembapan2">82%</string>
-    <string name="rincian_uv1">UV</string>
-    <string name="rincian_uv2">6 Sedang</string>
-    <string name="rincian_visibiltas1">Visibilitas</string>
-    <string name="rincian_visibiltas2">14 km</string>
-    <string name="rincian_tekanan_udara1">Tekanan udara</string>
-    <string name="rincian_tekanan_udara2">1006 hPa</string>
+    <string name="nama_daerah" translatable="false">Cilegon</string>
+    <string name="temperatur" translatable="false">27°</string>
+    <string name="kondisi_cuaca" translatable="false">Sebagian berawan</string>
+    <string name="waktu_dan_temperatur" translatable="false">Kam 33° / 25°</string>
+    <string name="kualitas_udara" translatable="false">Kualitas udara: 155 - Tidak Sehat</string>
+    <string name="suhu_besok" translatable="false">Suhu Besok Terasa Seperti</string>
+    <string name="kelembapan_suhu" translatable="false">Kelembapan membuat suhu tinggi terasa seperti 104°F</string>
+    <string name="rincian_cuaca" translatable="false">Rincian Cuaca</string>
+    <string name="rincian_suhu1" translatable="false">Terasa seperti</string>
+    <string name="rincian_suhu2" translatable="false">31°</string>
+    <string name="rincian_angin1" translatable="false">Angin U</string>
+    <string name="rincian_angin2" translatable="false">14 km/j</string>
+    <string name="rincian_kelembapan1" translatable="false">Kelembapan</string>
+    <string name="rincian_kelembapan2" translatable="false">82%</string>
+    <string name="rincian_uv1" translatable="false">UV</string>
+    <string name="rincian_uv2" translatable="false">6 Sedang</string>
+    <string name="rincian_visibiltas1" translatable="false">Visibilitas</string>
+    <string name="rincian_visibiltas2" translatable="false">14 km</string>
+    <string name="rincian_tekanan_udara1" translatable="false">Tekanan udara</string>
+    <string name="rincian_tekanan_udara2" translatable="false">1006 hPa</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="Thunderstorm">Thunderstorm</string>
+    <string name="light_rain">Light Rain</string>
+    <string name="rain_thunderstorm">Rain Thunderstorm</string>
+    <string name="partly_cloudy">Partly Cloudy</string>
+    <string name="sunny">Sunny</string>
+    <string name="Hazy">Hazy</string>
+    <string name="logout">Logout</string>
+    <string name="change_language">Change Language</string>
+    <string name="notifications">Notifications</string>
 
     <!-- Array Kategori Tanaman -->
     <string-array name="category_array">
-        <item>Tanaman Hias</item>
-        <item>Tanaman Obat</item>
-        <item>Tanaman Buah</item>
-        <item>Tanaman Sayur</item>
-        <item>Tanaman Paku</item>
-        <item>Tanaman Langka</item>
+        <item>Decorative plants</item>
+        <item>Medicinal plants</item>
+        <item>Fruit plants</item>
+        <item>Vegetable plants</item>
+        <item>Fern plant</item>
+        <item>Rare plants</item>
     </string-array>
 </resources>

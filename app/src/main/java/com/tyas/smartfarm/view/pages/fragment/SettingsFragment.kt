@@ -1,6 +1,10 @@
 package com.tyas.smartfarm.view.pages.fragment
 
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +14,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentSettingsBinding
 import com.tyas.smartfarm.util.DataStoreManager
-import com.tyas.smartfarm.viewmodel.SettingsViewModel
+import com.tyas.smartfarm.view.pages.viewmodel.SettingsViewModel
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class SettingsFragment : Fragment() {
 
@@ -49,27 +53,23 @@ class SettingsFragment : Fragment() {
         }
 
         // Setup language spinner
-        val languages = listOf("English", "Bahasa Indonesia", "Español")
+        val languages = listOf("English", "Bahasa Indonesia")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerLanguage.adapter = adapter
 
-        // Observe selected language
-        settingsViewModel.selectedLanguage.observe(viewLifecycleOwner) { language ->
-            binding.spinnerLanguage.setSelection(languages.indexOf(language))
+
+        binding.btnLanguageSettings.setOnClickListener {
+            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(intent)
+
+            Toast.makeText(
+                requireContext(),
+                "Please select your preferred language in device settings.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
-        // Handle language selection
-        binding.spinnerLanguage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedLanguage = languages[position]
-                lifecycleScope.launch {
-                    settingsViewModel.updateLanguage(selectedLanguage)
-                }
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
 
         // Logout button
         binding.btnLogout.setOnClickListener {

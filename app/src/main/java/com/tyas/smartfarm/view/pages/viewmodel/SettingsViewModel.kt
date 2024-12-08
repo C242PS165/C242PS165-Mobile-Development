@@ -1,4 +1,4 @@
-package com.tyas.smartfarm.viewmodel
+package com.tyas.smartfarm.view.pages.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

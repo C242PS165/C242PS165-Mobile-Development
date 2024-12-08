@@ -10,45 +10,44 @@
         android:id="@+id/tv_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notifications"
+        android:text="@string/notifications"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_notifications" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Section Language -->
-    <TextView
-        android:id="@+id/tv_language"
-        android:layout_width="wrap_content"
+
+
+
+    <Button
+        android:id="@+id/btn_language_settings"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Language"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:text="@string/change_language"
+        android:gravity="start|center"
+        android:layout_marginTop="18dp"
+        android:drawableEnd="@drawable/ic_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_notifications"
-        android:layout_marginTop="24dp" />
-
-    <Spinner
-        android:id="@+id/spinner_language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_language" />
+        app:layout_constraintTop_toBottomOf="@id/tv_notifications" />
 
     <!-- Section Logout -->
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout"
+        android:drawableEnd="@drawable/ic_logout"
+        android:gravity="start|center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btn_language_settings" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
             // Sembunyikan BottomNavigation di halaman tertentu
             when (destination.id) {
+                R.id.settingsFragment,
                 R.id.addPlantFragment,
                 R.id.splashFragment,
                 R.id.onBoardFragment,
