@@ -1,6 +1,5 @@
 package com.tyas.smartfarm.view.pages.fragment
 
-import WeatherViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import com.tyas.smartfarm.view.adapter.DailyForecastAdapter
 import com.tyas.smartfarm.view.adapter.DailyWeather
 import com.tyas.smartfarm.view.adapter.HourlyForecastAdapter
 import com.tyas.smartfarm.view.adapter.HourlyWeather
+import com.tyas.smartfarm.view.pages.viewmodel.WeatherViewModel
 
 class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null

@@ -1,3 +1,5 @@
+package com.tyas.smartfarm.view.pages.viewmodel
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
