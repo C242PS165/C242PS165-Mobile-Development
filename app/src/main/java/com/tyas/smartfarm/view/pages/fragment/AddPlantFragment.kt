@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentAddPlantBinding
 import com.tyas.smartfarm.model.Plant
@@ -27,23 +28,43 @@ class AddPlantFragment : Fragment() {
     ): View {
         binding = FragmentAddPlantBinding.inflate(inflater, container, false)
 
+        // Inisialisasi ViewModel
         plantViewModel = ViewModelProvider(this).get(PlantViewModel::class.java)
 
+        // Set hint untuk tanggal tanam
         binding.etDate.hint = "Pilih Tanggal Tanam"
+
+        // Setup spinner kategori
         val categories = resources.getStringArray(R.array.category_array)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategory.adapter = adapter
 
+        // Event untuk memilih tanggal
         binding.etDate.setOnClickListener {
             showDatePicker()
         }
 
+        // Event untuk menyimpan data tanaman
         binding.btnSave.setOnClickListener {
             savePlantData()
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Observasi success dan error dari ViewModel
+        plantViewModel.success.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_addPlantFragment_to_plantFragment)
+        }
+
+        plantViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showDatePicker() {
@@ -70,26 +91,35 @@ class AddPlantFragment : Fragment() {
         val category = binding.spinnerCategory.selectedItem.toString()
         val plantDate = binding.etDate.text.toString()
 
-        // Validasi form
+        // Validasi form input
         if (plantName.isEmpty() || description.isEmpty() || plantDate.isEmpty()) {
             Toast.makeText(requireContext(), "Semua field harus diisi!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Membuat objek tanaman tanpa gambar
+        // Validasi tambahan (contoh: nama tanaman minimal 3 karakter)
+        if (plantName.length < 3) {
+            Toast.makeText(requireContext(), "Nama tanaman terlalu pendek!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Dapatkan UID pengguna yang sedang login
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+        if (currentUserId == null) {
+            Toast.makeText(requireContext(), "User belum login", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Membuat objek Plant dengan UID
         val newPlant = Plant(
+            userId = currentUserId, // Tambahkan UID ke objek Plant
             name = plantName,
             description = description,
             category = category,
             plantingDate = plantDate
         )
 
-        // Menyimpan data tanaman ke Firebase Realtime Database
+        // Menyimpan data ke Firebase melalui ViewModel
         plantViewModel.insertPlant(newPlant)
-
-        Toast.makeText(requireContext(), "Tanaman berhasil disimpan ke Firebase!", Toast.LENGTH_SHORT).show()
-
-        // Navigasi kembali ke halaman PlantFragment setelah sukses
-        findNavController().navigate(R.id.action_addPlantFragment_to_plantFragment)
     }
 }
