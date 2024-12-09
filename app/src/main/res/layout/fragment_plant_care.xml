@@ -1,46 +1,112 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Nama Tanaman -->
-    <TextView
-        android:id="@+id/textViewPlantName"
+    <!-- ProgressBar -->
+    <ProgressBar
+        android:id="@+id/progressBarPlant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nama Tanaman"
-        android:textSize="18sp"
-        android:textColor="#2C3E50"
-        android:layout_marginBottom="8dp" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
-    <!-- Kategori Tanaman -->
-    <TextView
-        android:id="@+id/textViewPlantCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kategori"
-        android:textSize="16sp"
-        android:textColor="#34495E"
-        android:layout_marginBottom="8dp" />
+    <!-- Konten ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- Deskripsi Tanaman -->
-    <TextView
-        android:id="@+id/textViewPlantDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deskripsi"
-        android:textSize="16sp"
-        android:textColor="#34495E"
-        android:layout_marginBottom="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!-- Rekomendasi Perawatan -->
-    <TextView
-        android:id="@+id/textViewCareRecommendation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Perawatan tanaman akan muncul di sini."
-        android:textSize="16sp"
-        android:textColor="#34495E" />
+            <!-- Nama Tanaman -->
+            <TextView
+                android:id="@+id/textViewPlantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Tanaman"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#2C3E50"
+                android:layout_marginBottom="16dp" />
 
-</LinearLayout>
+            <!-- Kategori Tanaman -->
+            <TextView
+                android:id="@+id/textViewPlantCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kategori"
+                android:textSize="18sp"
+                android:textColor="#34495E"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Separator -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#BDC3C7"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Deskripsi Tanaman (Editable) -->
+            <EditText
+                android:id="@+id/editTextPlantDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Deskripsi Tanaman"
+                android:textSize="16sp"
+                android:textColor="#34495E"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Tanggal Penanaman -->
+            <TextView
+                android:id="@+id/textViewPlantingDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Penanaman"
+                android:textSize="16sp"
+                android:textColor="#34495E"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Tombol Update dan Delete -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="16dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonUpdate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Update"
+                    android:backgroundTint="#4CAF50"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="8dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Delete"
+                    android:backgroundTint="#F44336"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Tombol Atur Pengingat -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSetReminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Atur Pengingat Tanaman"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
