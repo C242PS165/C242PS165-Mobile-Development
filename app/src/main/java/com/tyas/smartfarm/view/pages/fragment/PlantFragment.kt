@@ -60,48 +60,58 @@ class PlantFragment : Fragment() {
             sharedPreferences.edit().putBoolean("isFirstLogin", false).apply()
         }
 
+        // Inisialisasi ApiService
+        articleApiService = ApiClient.articleApiService
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvBroadcastMessage.text = "Check your plants! The forecast says rain tomorrow."
-
         plantViewModel = ViewModelProvider(this).get(PlantViewModel::class.java)
 
+        // Set up RecyclerView untuk tanaman
         plantAdapter = PlantAdapter()
         binding.rvPlants.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = plantAdapter
+            visibility = View.GONE // Sembunyikan secara default
         }
 
-        plantViewModel.plantList.observe(viewLifecycleOwner, { plants ->
-            if (plants.isNotEmpty()) {
-                plantAdapter.submitList(plants)
-            } else {
-                binding.tvBroadcastMessage.text = "No plants found."
-            }
-        })
-
-        // Handle loading state
-        plantViewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
-            if (isLoading) {
-                binding.tvBroadcastMessage.text = "Loading plants..."
-            } else {
-                binding.tvBroadcastMessage.text = "Check your plants! The forecast says rain tomorrow."
-            }
-        })
-
+        // Set up RecyclerView untuk artikel
         articleAdapter = ArticleAdapter(emptyList())
         binding.rvArticles.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = articleAdapter
+            visibility = View.GONE // Sembunyikan secara default
         }
 
-        articleApiService = ApiClient.articleApiService
+        // Observasi daftar tanaman
+        plantViewModel.plantList.observe(viewLifecycleOwner) { plants ->
+            if (plants.isNotEmpty()) {
+                plantAdapter.submitList(plants)
+                binding.rvPlants.visibility = View.VISIBLE
+            } else {
+                Toast.makeText(requireContext(), "No plants found.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Observasi status loading untuk tanaman
+        plantViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.rvPlants.visibility = View.GONE
+            } else {
+                binding.progressBar.visibility = View.GONE
+                binding.rvPlants.visibility = View.VISIBLE
+            }
+        }
+
+        // Panggil fetchArticles untuk memuat artikel
         fetchArticles()
 
+        // Navigasi ke halaman tambah tanaman
         binding.btnAddPlant.setOnClickListener {
             findNavController().navigate(R.id.action_plantFragment_to_addPlantFragment)
         }
@@ -110,41 +120,36 @@ class PlantFragment : Fragment() {
     private fun fetchArticles() {
         lifecycleScope.launch {
             try {
+                // Tampilkan ProgressBar untuk artikel dan sembunyikan RecyclerView
+                binding.progressBarArticles.visibility = View.VISIBLE
+                binding.rvArticles.visibility = View.GONE
+
                 val apiKey = "sk-f78d6751878343fd87895"
                 val response = articleApiService.getPlantArticles(apiKey).await()
 
-                // Log respons API untuk memverifikasi data yang diterima
-                Log.d("Article Data", "Received Response: $response")
-
                 val articles = response.data.map { articleData ->
-                    // Log artikel yang sedang diproses
-                    Log.d("Article Data", "Mapping Article: $articleData")
-
-                    // Menangani null atau ketidaksesuaian tipe pada sunlight
-                    val sunlightList = articleData.sunlight?.filterIsInstance<String>() ?: listOf("Pencahayaan Tidak Diketahui")
-
-                    // Menangani null pada defaultImage
-                    val imageUrl = articleData.defaultImage?.regularUrl ?: "URL Gambar Tidak Diketahui"
-
-                    // Membuat objek Article dengan data yang telah dipetakan
                     Article(
                         id = articleData.id,
-                        commonName = articleData.commonName ?: "Nama Tanaman Tidak Diketahui",
-                        scientificName = articleData.scientificName ?: listOf("Nama Ilmiah Tidak Diketahui"),
-                        otherName = articleData.otherName ?: listOf("Nama Lain Tidak Diketahui"),
-                        cycle = articleData.cycle ?: "Siklus Tidak Diketahui",
-                        watering = articleData.watering ?: "Penyiraman Tidak Diketahui",
-                        sunlight = sunlightList, // Memastikan List<String>
-                        defaultImage = articleData.defaultImage // Memastikan defaultImage tidak null
+                        commonName = articleData.commonName ?: "Unknown Name",
+                        scientificName = articleData.scientificName ?: listOf("Unknown Scientific Name"),
+                        otherName = articleData.otherName ?: listOf("Unknown Other Name"),
+                        cycle = articleData.cycle ?: "Unknown Cycle",
+                        watering = articleData.watering ?: "Unknown Watering",
+                        sunlight = articleData.sunlight ?: listOf("Unknown Sunlight"),
+                        defaultImage = articleData.defaultImage
                     )
                 }
 
-                // Mengupdate adapter dengan data artikel
+                // Tampilkan artikel di RecyclerView
                 articleAdapter.setArticles(articles)
+                binding.rvArticles.visibility = View.VISIBLE
             } catch (e: Exception) {
-                // Menangani error jika ada masalah
+                // Tampilkan pesan error jika gagal memuat artikel
                 Toast.makeText(requireContext(), "Failed to load articles: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("Article Data", "Error fetching articles: ${e.message}", e)
+            } finally {
+                // Sembunyikan ProgressBar setelah proses selesai
+                binding.progressBarArticles.visibility = View.GONE
             }
         }
     }
@@ -159,12 +164,12 @@ class PlantFragment : Fragment() {
         val btnNo = dialogView.findViewById<Button>(R.id.btnNo)
 
         btnYes.setOnClickListener {
-            Toast.makeText(requireContext(), "Selamat datang petani baru!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Welcome, new farmer!", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
 
         btnNo.setOnClickListener {
-            Toast.makeText(requireContext(), "Semoga harimu menyenangkan!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Have a nice day!", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
 
