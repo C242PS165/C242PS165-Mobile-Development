@@ -92,19 +92,19 @@ class PlantFragment : Fragment() {
             if (plants.isNotEmpty()) {
                 plantAdapter.submitList(plants)
                 binding.rvPlants.visibility = View.VISIBLE
+                binding.tvEmptyPlaceholder.visibility = View.GONE
             } else {
-                Toast.makeText(requireContext(), "No plants found.", Toast.LENGTH_SHORT).show()
+                binding.rvPlants.visibility = View.GONE
+                binding.tvEmptyPlaceholder.visibility = View.VISIBLE
             }
         }
 
         // Observasi status loading untuk tanaman
         plantViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             if (isLoading) {
-                binding.progressBar.visibility = View.VISIBLE
                 binding.rvPlants.visibility = View.GONE
-            } else {
-                binding.progressBar.visibility = View.GONE
-                binding.rvPlants.visibility = View.VISIBLE
+                binding.tvEmptyPlaceholder.visibility = View.GONE
             }
         }
 
