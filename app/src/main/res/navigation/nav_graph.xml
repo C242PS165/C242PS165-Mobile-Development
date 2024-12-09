@@ -71,7 +71,17 @@
         <action
             android:id="@+id/action_plantFragment_to_addPlantFragment"
             app:destination="@id/addPlantFragment" />
+        <action
+            android:id="@+id/action_plantFragment_to_plantCareFragment"
+            app:destination="@id/plantCareFragment" />
     </fragment>
+
+    <!-- Plant Care Fragment -->
+    <fragment
+        android:id="@+id/plantCareFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.PlantCareFragment"
+        tools:layout="@layout/fragment_plant_care"
+        android:label="Plant Care" />
 
     <!-- Weather Fragment -->
     <fragment
@@ -110,8 +120,6 @@
         android:name="com.tyas.smartfarm.view.pages.fragment.AddPlantFragment"
         android:label="fragment_add_plant"
         tools:layout="@layout/fragment_add_plant">
-
-        <!-- Tambahkan action untuk navigasi ke PlantFragment -->
         <action
             android:id="@+id/action_addPlantFragment_to_plantFragment"
             app:destination="@id/plantFragment" />

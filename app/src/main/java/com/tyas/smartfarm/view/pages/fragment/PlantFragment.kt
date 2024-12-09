@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentPlantBinding
 import com.tyas.smartfarm.model.Article
+import com.tyas.smartfarm.model.Plant
 import com.tyas.smartfarm.view.adapter.ArticleAdapter
 import com.tyas.smartfarm.view.adapter.PlantAdapter
 import com.tyas.smartfarm.view.pages.viewmodel.PlantViewModel
@@ -72,7 +73,9 @@ class PlantFragment : Fragment() {
         plantViewModel = ViewModelProvider(this).get(PlantViewModel::class.java)
 
         // Set up RecyclerView untuk tanaman
-        plantAdapter = PlantAdapter()
+        plantAdapter = PlantAdapter { plant ->
+            navigateToPlantCareFragment(plant)
+        }
         binding.rvPlants.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = plantAdapter
@@ -115,6 +118,18 @@ class PlantFragment : Fragment() {
         binding.btnAddPlant.setOnClickListener {
             findNavController().navigate(R.id.action_plantFragment_to_addPlantFragment)
         }
+    }
+
+    private fun navigateToPlantCareFragment(plant: Plant) {
+        val bundle = Bundle().apply {
+            putString("plantId", plant.id)
+            putString("userId", plant.userId)
+            putString("plantName", plant.name)
+            putString("plantCategory", plant.category)
+            putString("plantDescription", plant.description)
+            putString("plantingDate", plant.plantingDate)
+        }
+        findNavController().navigate(R.id.action_plantFragment_to_plantCareFragment, bundle)
     }
 
     private fun fetchArticles() {
