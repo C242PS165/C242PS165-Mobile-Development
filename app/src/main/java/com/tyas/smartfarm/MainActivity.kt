@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.tyas.smartfarm.databinding.ActivityMainBinding
 
+@Suppress("UNUSED_EXPRESSION")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -63,7 +64,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment,
                 R.id.onBoardFragment,
                 R.id.loginFragment,
-                R.id.registerFragment -> controlBottomNavigationVisibility(false)
+                R.id.registerFragment,
+                R.id.plantCareFragment -> controlBottomNavigationVisibility(false)
                 else -> controlBottomNavigationVisibility(true)
             }
         }
