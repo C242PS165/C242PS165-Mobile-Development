@@ -17,6 +17,7 @@ class PlantCareViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
 
+    // Fetch details of a plant
     fun fetchPlantDetails(userId: String, plantId: String) {
         _isLoading.value = true
         val database = FirebaseDatabase.getInstance()
@@ -35,5 +36,33 @@ class PlantCareViewModel : ViewModel() {
             _errorMessage.value = "Gagal memuat data tanaman: ${it.message}"
             _isLoading.value = false
         }
+    }
+
+    // Delete plant from Firebase
+    fun deletePlantFromDatabase(userId: String, plantId: String) {
+        _isLoading.value = true
+        val database = FirebaseDatabase.getInstance()
+
+        val plantRef = database.getReference("plants/$userId/$plantId")
+        val userPlantRef = database.getReference("users/$userId/plants/$plantId")
+
+        // Remove plant data from the "plants" and "users" paths in Firebase
+        plantRef.removeValue()
+            .addOnSuccessListener {
+                userPlantRef.removeValue()
+                    .addOnSuccessListener {
+                        // Data berhasil dihapus
+                        _isLoading.value = false
+                        _errorMessage.value = null
+                    }
+                    .addOnFailureListener {
+                        _errorMessage.value = "Gagal menghapus data tanaman dari pengguna"
+                        _isLoading.value = false
+                    }
+            }
+            .addOnFailureListener {
+                _errorMessage.value = "Gagal menghapus data tanaman"
+                _isLoading.value = false
+            }
     }
 }
