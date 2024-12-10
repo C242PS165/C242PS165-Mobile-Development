@@ -33,26 +33,6 @@
                 android:paddingTop="16dp"
                 android:layout_marginBottom="24dp"/>
 
-            <!-- Gambar Tanaman Placeholder -->
-            <ImageView
-                android:id="@+id/ivPlantImage"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/placeholder_image"
-                android:scaleType="centerCrop"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Tombol Upload Gambar -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUploadImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Upload Gambar"
-                android:backgroundTint="#1ABC9C"
-                android:textColor="@color/white"
-                android:padding="12dp"
-                android:layout_marginBottom="24dp"/>
-
             <!-- Input Nama Tanaman -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPlantName"

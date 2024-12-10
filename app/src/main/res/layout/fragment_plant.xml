@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Plant Cards Section (ProgressBar and RecyclerView) -->
+        <!-- Plant Cards Section -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_plants_section"
             android:layout_width="match_parent"
@@ -42,24 +42,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- ProgressBar untuk menunjukkan loading -->
+            <!-- ProgressBar for Plants -->
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:indeterminate="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- RecyclerView untuk daftar tanaman -->
+            <!-- RecyclerView for Plants -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_plants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:paddingBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- TextView for Empty Placeholder -->
+            <TextView
+                android:id="@+id/tv_empty_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Belum ada catatan dibuat"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/progressBar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -99,7 +114,7 @@
             android:id="@+id/tv_articles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Some Article for you"
+            android:text="Some Articles for You"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_bold"
@@ -107,11 +122,25 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp" />
 
+        <!-- ProgressBar for Articles -->
+        <ProgressBar
+            android:id="@+id/progressBarArticles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminate="true"
+            app:layout_constraintTop_toBottomOf="@id/tv_articles"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- RecyclerView for Articles -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_articles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_articles"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/progressBarArticles"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp" />

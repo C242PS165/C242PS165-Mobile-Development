@@ -1,5 +1,8 @@
 package com.tyas.smartfarm
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.tyas.smartfarm.databinding.ActivityMainBinding
 
+@Suppress("UNUSED_EXPRESSION")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -16,13 +20,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Setup NavHostFragment
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
-        // Ubah startDestination di sini
+        // Set startDestination secara dinamis
         navController.setGraph(R.navigation.nav_graph, null)
 
+        // Listener untuk Bottom Navigation
         binding.bottomNavigation.setOnItemSelectedListener { menuItemId ->
             when (menuItemId) {
                 R.id.navigation_lay_weather -> {
@@ -63,14 +69,33 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment,
                 R.id.onBoardFragment,
                 R.id.loginFragment,
-                R.id.registerFragment -> controlBottomNavigationVisibility(false)
+                R.id.registerFragment,
+                R.id.plantCareFragment -> controlBottomNavigationVisibility(false)
                 else -> controlBottomNavigationVisibility(true)
             }
         }
+
+        // Buat Notification Channel untuk notifikasi pengingat
+        createNotificationChannel()
     }
 
     // Fungsi untuk mengontrol visibilitas Bottom Navigation
     private fun controlBottomNavigationVisibility(isVisible: Boolean) {
         binding.bottomNavigation.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    // Fungsi untuk membuat Notification Channel
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelName = "Pengingat Tanaman"
+            val channelDescription = "Kanal untuk pengingat merawat tanaman"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("PLANT_REMINDER_CHANNEL", channelName, importance).apply {
+                description = channelDescription
+            }
+
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(channel)
+        }
     }
 }

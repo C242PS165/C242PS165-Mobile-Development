@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.databinding.ItemPlantBinding
 import com.tyas.smartfarm.model.Plant
 
-class PlantAdapter : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
+class PlantAdapter(
+    private val onSeeMoreClick: (Plant) -> Unit // Callback untuk menangani klik "Lihat Selengkapnya"
+) : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantViewHolder {
         val binding = ItemPlantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,6 +29,11 @@ class PlantAdapter : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffC
             // Set data tanaman
             binding.tvPlantName.text = plant.name
             binding.tvPlantStatus.text = plant.category
+
+            // Tangani klik "Lihat Selengkapnya"
+            binding.tvSeeMore.setOnClickListener {
+                onSeeMoreClick(plant)
+            }
         }
     }
 }
