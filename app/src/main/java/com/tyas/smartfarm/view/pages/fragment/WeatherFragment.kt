@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentWeatherBinding
+import com.tyas.smartfarm.model.WeatherData
 import com.tyas.smartfarm.view.adapter.DailyForecastAdapter
 import com.tyas.smartfarm.view.adapter.DailyWeather
 import com.tyas.smartfarm.view.adapter.HourlyForecastAdapter
@@ -68,8 +71,10 @@ class WeatherFragment : Fragment() {
 
         weatherViewModel.airQuality.observe(viewLifecycleOwner) { airQuality ->
             val airQualityIndex = getAirQualityIndexLabel(airQuality) // Mendapatkan label AQI
-            binding.airQualityText.text = "Kualitas Udara: $airQuality ($airQualityIndex)"
+            val airQualityText = getString(R.string.air_quality_text, airQuality, airQualityIndex)
+            binding.airQualityText.text = airQualityText
         }
+
 
 
         weatherViewModel.weatherIcon.observe(viewLifecycleOwner) { iconResId ->
@@ -78,9 +83,10 @@ class WeatherFragment : Fragment() {
 
         // Observasi data harian
         weatherViewModel.weatherData.observe(viewLifecycleOwner) { data ->
-            val dailyAdapter = DailyForecastAdapter(data.map {
+            val filteredData = filterFirstDataPerDay(data) // Ambil data pertama per hari
+            val dailyAdapter = DailyForecastAdapter(filteredData.map {
                 DailyWeather(
-                    it.datetime,
+                    formatToDayName(it.datetime), // Konversi datetime menjadi nama hari
                     it.weather_desc,
                     "${it.temperature}°",
                     weatherViewModel.getWeatherIcon(it.weather_desc) // Panggil fungsi dari ViewModel
@@ -88,6 +94,13 @@ class WeatherFragment : Fragment() {
             })
             binding.dailyForecastRecycler.layoutManager = LinearLayoutManager(requireContext())
             binding.dailyForecastRecycler.adapter = dailyAdapter
+        }
+
+
+
+        // Observasi pesan cuaca
+        weatherViewModel.weatherMessage.observe(viewLifecycleOwner) { message ->
+            binding.weatherMessageText.text = message
         }
 
         // Observasi status loading
@@ -106,16 +119,37 @@ class WeatherFragment : Fragment() {
         weatherViewModel.fetchWeatherData()
     }
 
-    private fun getAirQualityIndexLabel(airQuality: Int): String {
-        return when (airQuality) {
-            in 0..50 -> "Baik"
-            in 51..100 -> "Sedang"
-            in 101..150 -> "Tidak Sehat bagi Kelompok Sensitif"
-            in 151..200 -> "Tidak Sehat"
-            in 201..300 -> "Sangat Tidak Sehat"
-            else -> "Berbahaya"
+    fun filterFirstDataPerDay(data: List<WeatherData>): List<WeatherData> {
+        val groupedData = data.groupBy {
+            it.datetime.substring(0, 10) // Ambil hanya bagian tanggal (yyyy-MM-dd)
+        }
+        return groupedData.values.mapNotNull { dailyData ->
+            dailyData.minByOrNull { it.datetime } // Ambil data pertama berdasarkan waktu
         }
     }
+
+    private fun formatToDayName(datetime: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("EEEE", Locale.getDefault()) // "EEEE" menghasilkan nama hari penuh
+        return try {
+            val date = inputFormat.parse(datetime)
+            date?.let { outputFormat.format(it) } ?: ""
+        } catch (e: Exception) {
+            ""
+        }
+    }
+
+    private fun getAirQualityIndexLabel(airQuality: Int): String {
+        return when (airQuality) {
+            in 0..50 -> getString(R.string.air_quality_good)
+            in 51..100 -> getString(R.string.air_quality_moderate)
+            in 101..150 -> getString(R.string.air_quality_unhealthy_sensitive)
+            in 151..200 -> getString(R.string.air_quality_unhealthy)
+            in 201..300 -> getString(R.string.air_quality_very_unhealthy)
+            else -> getString(R.string.air_quality_hazardous)
+        }
+    }
+
 
 
     override fun onDestroyView() {
