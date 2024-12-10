@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.tyas.smartfarm.databinding.FragmentPlantCareBinding
 import com.tyas.smartfarm.view.pages.viewmodel.PlantCareViewModel
 import android.app.AlertDialog
+import com.tyas.smartfarm.view.pages.customview.PlantReminderBottomSheet
 
 class PlantCareFragment : Fragment() {
 
@@ -58,6 +59,13 @@ class PlantCareFragment : Fragment() {
         // Set listener untuk tombol Delete
         binding.buttonDelete.setOnClickListener {
             showDeleteConfirmationDialog()
+        }
+
+        // Tambahkan listener untuk tombol "Atur Pengingat"
+        binding.buttonSetReminder.setOnClickListener {
+            // Tampilkan BottomSheet untuk pengingat
+            val bottomSheet = PlantReminderBottomSheet()
+            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         }
     }
 
