@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface WeatherApiService {
-    @GET("forecast/35.19.05.2002")
+    @GET("forecast/36.72.02.1005")
     suspend fun getWeatherData(): Response<WeatherResponse>
 }

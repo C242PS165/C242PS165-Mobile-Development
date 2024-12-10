@@ -55,6 +55,7 @@
     <string name="logout">Logout</string>
     <string name="change_language">Change Language</string>
     <string name="notifications">Notifications</string>
+    <string name="air_quality_text">Air Quality: %1$d (%2$s)</string>
     <string name="weather_message_cloudy">Cloudy skies, perhaps a good time to garden in the shade!</string>
     <string name="weather_message_thunderstorm">Be careful, there’s a thunderstorm. Stay indoors and stay safe!</string>
     <string name="weather_message_light_rain">Light rain, make sure your plants don’t get too wet!</string>

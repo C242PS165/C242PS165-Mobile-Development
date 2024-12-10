@@ -33,6 +33,7 @@
     <string name="logout">Keluar</string>
     <string name="change_language">Ganti Bahasa</string>
     <string name="notifications">Notifikasi</string>
+    <string name="air_quality_text">Kualitas Udara: %1$d (%2$s)</string>
     <string name="weather_message_cloudy">Langit berawan, mungkin waktu yang tepat untuk berkebun di tempat teduh!</string>
     <string name="weather_message_thunderstorm">Hati-hati, ada petir. Tetap di dalam rumah dan aman ya!</string>
     <string name="weather_message_light_rain">Hujan ringan, pastikan tanamanmu tidak terlalu basah!</string>
