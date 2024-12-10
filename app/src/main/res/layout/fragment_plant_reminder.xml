@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewReminderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Atur Waktu Pengingat"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- NumberPicker untuk Jam -->
+        <NumberPicker
+            android:id="@+id/numberPickerHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Separator (Misalnya untuk memisahkan Jam dan Menit) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="24sp"
+            android:layout_gravity="center" />
+
+        <!-- NumberPicker untuk Menit -->
+        <NumberPicker
+            android:id="@+id/numberPickerMinute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <!-- Tombol untuk menyimpan waktu -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSetReminderTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Pengingat"
+        app:cornerRadius="12dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF" />
+</LinearLayout>
