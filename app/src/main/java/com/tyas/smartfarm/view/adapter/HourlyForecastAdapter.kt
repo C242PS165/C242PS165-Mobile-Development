@@ -5,30 +5,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.tyas.smartfarm.R
+import com.tyas.smartfarm.model.DataItem
 
-data class HourlyWeather(val time: String, val temperature: String, val iconResId: Int)
-
-class HourlyForecastAdapter(private val hourlyData: List<HourlyWeather>) :
+class HourlyForecastAdapter(private val hourlyData: List<DataItem>) :
     RecyclerView.Adapter<HourlyForecastAdapter.HourlyViewHolder>() {
 
     inner class HourlyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val timeTextView: TextView = view.findViewById(R.id.hourly_time)
-        val weatherIconImageView: ImageView = view.findViewById(R.id.hourly_weather_icon)
-        val temperatureTextView: TextView = view.findViewById(R.id.hourly_temperature)
+        val dayTextView: TextView = view.findViewById(R.id.date_text)
+        val weatherIconImageView: ImageView = view.findViewById(R.id.weather_icon)
+        val summaryTextView: TextView = view.findViewById(R.id.summary_text)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyForecastAdapter.HourlyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_hourly_forecast, parent, false)
         return HourlyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         val item = hourlyData[position]
-        holder.timeTextView.text = item.time
-        holder.temperatureTextView.text = item.temperature
-        holder.weatherIconImageView.setImageResource(item.iconResId)
+        holder.summaryTextView.text = item.summary
+        holder.dayTextView.text = item.date
+        item.iconResId.let { holder.weatherIconImageView.setImageResource(it) }
+
+        val poppinsRegular = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_regular)
+        holder.summaryTextView.typeface = poppinsRegular
+
+        val poppinsMedium = ResourcesCompat.getFont(holder.itemView.context, R.font.poppins_medium)
+        holder.dayTextView.typeface = poppinsMedium
     }
 
     override fun getItemCount(): Int = hourlyData.size
