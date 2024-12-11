@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import java.text.SimpleDateFormat
-import java.util.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.databinding.FragmentWeatherBinding
-import com.tyas.smartfarm.model.WeatherData
+import com.tyas.smartfarm.model.DataItem
 import com.tyas.smartfarm.view.adapter.DailyForecastAdapter
 import com.tyas.smartfarm.view.adapter.DailyWeather
 import com.tyas.smartfarm.view.adapter.HourlyForecastAdapter
-import com.tyas.smartfarm.view.adapter.HourlyWeather
 import com.tyas.smartfarm.view.pages.viewmodel.WeatherViewModel
+import okio.AsyncTimeout.Companion.condition
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null
@@ -35,24 +35,34 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Data statis untuk Hourly Forecast
-        val hourlyData = listOf(
-            HourlyWeather("12:00", "27°", R.drawable.ic_cloudy),
-            HourlyWeather("13:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("14:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("15:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("16:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("17:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("18:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("19:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("20:00", "26°", R.drawable.ic_cloudy),
-            HourlyWeather("21:00", "26°", R.drawable.ic_cloudy)
-        )
+        // Panggil fungsi fetchSimplifiedWeatherData
+        weatherViewModel.fetchSimplifiedWeatherData()
 
-        // Adapter untuk Hourly Forecast
-        val hourlyAdapter = HourlyForecastAdapter(hourlyData)
-        binding.hourlyForecastRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.hourlyForecastRecycler.adapter = hourlyAdapter
+        // Observasi data dari simplifiedWeatherData
+        weatherViewModel.simplifiedWeatherData.observe(viewLifecycleOwner) { dataItems ->
+            dataItems?.let { items ->
+                // Map data items ke format yang sesuai untuk adapter
+                val formattedData = items.map { item ->
+                    DataItem(
+                        item.date?.let { formatToDayName(it) }, // Konversi datetime menjadi nama hari jika diperlukan
+                        item.summary,
+                        weatherViewModel.getWeatherIconByDescription(item.summary) // Pastikan sesuai dengan properti yang dibutuhkan
+
+                    )
+                }
+
+                // Atur adapter untuk RecyclerView
+                val hourlyAdapter = HourlyForecastAdapter(formattedData)
+                binding.hourlyForecastRecycler.layoutManager = LinearLayoutManager(
+                    requireContext(), LinearLayoutManager.HORIZONTAL, false
+                )
+                binding.hourlyForecastRecycler.adapter = hourlyAdapter
+            } ?: run {
+                // Tampilkan pesan jika data kosong atau null
+                Toast.makeText(requireContext(), "Tidak ada data cuaca sederhana", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
 
 
@@ -81,15 +91,15 @@ class WeatherFragment : Fragment() {
             binding.weatherIcon.setImageResource(iconResId)
         }
 
-        // Observasi data harian
+        // Observasi data Per jam
         weatherViewModel.weatherData.observe(viewLifecycleOwner) { data ->
-            val filteredData = filterFirstDataPerDay(data) // Ambil data pertama per hari
-            val dailyAdapter = DailyForecastAdapter(filteredData.map {
+            //val filteredData = filterFirstDataPerDay(data) // Ambil data pertama per hari
+            val dailyAdapter = DailyForecastAdapter(data.map {
                 DailyWeather(
-                    formatToDayName(it.datetime), // Konversi datetime menjadi nama hari
+                    it.datetime, // Konversi datetime menjadi nama hari
                     it.weather_desc,
                     "${it.temperature}°",
-                    weatherViewModel.getWeatherIcon(it.weather_desc) // Panggil fungsi dari ViewModel
+                    weatherViewModel.getWeatherIconByDescription(it.weather_desc)// Panggil fungsi dari ViewModel
                 )
             })
             binding.dailyForecastRecycler.layoutManager = LinearLayoutManager(requireContext())
@@ -119,26 +129,6 @@ class WeatherFragment : Fragment() {
         weatherViewModel.fetchWeatherData()
     }
 
-    fun filterFirstDataPerDay(data: List<WeatherData>): List<WeatherData> {
-        val groupedData = data.groupBy {
-            it.datetime.substring(0, 10) // Ambil hanya bagian tanggal (yyyy-MM-dd)
-        }
-        return groupedData.values.mapNotNull { dailyData ->
-            dailyData.minByOrNull { it.datetime } // Ambil data pertama berdasarkan waktu
-        }
-    }
-
-    private fun formatToDayName(datetime: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("EEEE", Locale.getDefault()) // "EEEE" menghasilkan nama hari penuh
-        return try {
-            val date = inputFormat.parse(datetime)
-            date?.let { outputFormat.format(it) } ?: ""
-        } catch (e: Exception) {
-            ""
-        }
-    }
-
     private fun getAirQualityIndexLabel(airQuality: Int): String {
         return when (airQuality) {
             in 0..50 -> getString(R.string.air_quality_good)
@@ -150,6 +140,16 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    private fun formatToDayName(datetime: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("EEEE", Locale.getDefault()) // "EEEE" menghasilkan nama hari penuh
+        return try {
+            val date = inputFormat.parse(datetime)
+            date?.let { outputFormat.format(it) } ?: ""
+        } catch (e: Exception) {
+            ""
+        }
+    }
 
 
     override fun onDestroyView() {

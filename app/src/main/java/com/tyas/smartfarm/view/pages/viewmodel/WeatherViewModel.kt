@@ -10,11 +10,13 @@ import com.tyas.smartfarm.model.WeatherData
 import kotlinx.coroutines.launch
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.tyas.smartfarm.model.DataItem
 
 class WeatherViewModel(application: Application) : AndroidViewModel(application) {
 
     // LiveData yang sudah ada
     val weatherData = MutableLiveData<List<WeatherData>>()
+    val simplifiedWeatherData = MutableLiveData<List<DataItem>?>()
     val isLoading = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
@@ -43,7 +45,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
                         airQuality.value = it.humidity
 
                         // Tetapkan ikon berdasarkan deskripsi cuaca
-                        weatherIcon.value = getWeatherIcon(it.weather_desc)
+                        weatherIcon.value = getWeatherIconByDescription(it.weather_desc)
 
                         // Tetapkan pesan berdasarkan kondisi cuaca
                         weatherMessage.value = generateWeatherMessage(it.weather_desc)
@@ -59,6 +61,37 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun fetchSimplifiedWeatherData() {
+        viewModelScope.launch {
+            isLoading.value = true
+            try {
+                val response = ApiClient.weatherApiService.getSimplifiedWeatherData()
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val dataItems = response.body()?.data // Ambil data dari API
+                    dataItems?.let { items ->
+                        // Proses data dan map ke `simplifiedWeatherData`
+                        simplifiedWeatherData.value = items.map { item ->
+                            DataItem(
+                                date = item?.date,
+                                summary = item?.summary,
+                                iconResId = getWeatherIconByDescription(item?.summary) // Tetapkan ikon menggunakan fungsi yang sama
+                            )
+                        }
+                    } ?: run {
+                        simplifiedWeatherData.value = emptyList() // Jika data kosong
+                    }
+                } else {
+                    errorMessage.value = "Gagal memuat data cuaca sederhana"
+                }
+            } catch (e: Exception) {
+                errorMessage.value = e.message
+            } finally {
+                isLoading.value = false
+            }
+        }
+    }
+
+
     object WeatherDescriptions {
         const val CLOUDY = "berawan"
         const val THUNDERSTORM = "petir"
@@ -66,7 +99,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         const val RAIN_THUNDERSTORM = "hujan petir"
         const val PARTLY_CLOUDY = "cerah berawan"
         const val SUNNY = "cerah"
-        const val HAZY = "udara kabur"
+        const val HAZY = "kabut/asap"
     }
 
     private fun generateWeatherMessage(weatherDesc: String?): String {
@@ -86,8 +119,8 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
 
 
     // Fungsi untuk memetakan deskripsi cuaca ke ikon
-    fun getWeatherIcon(weatherDesc: String?): Int {
-        return when (weatherDesc?.lowercase()) {
+    fun getWeatherIconByDescription(description: String?): Int {
+        return when (description?.lowercase()) {
             WeatherDescriptions.CLOUDY -> R.drawable.img
             WeatherDescriptions.THUNDERSTORM -> R.drawable.ic_thunderstorm
             WeatherDescriptions.LIGHT_RAIN -> R.drawable.ic_light_rain
@@ -98,6 +131,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             else -> R.drawable.placeholder_image
         }
     }
+
 
 
 
