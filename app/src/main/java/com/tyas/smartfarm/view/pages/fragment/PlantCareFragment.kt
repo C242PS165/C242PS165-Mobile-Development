@@ -68,13 +68,16 @@ class PlantCareFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }
 
-
-
         // Tambahkan listener untuk tombol "Atur Pengingat"
         binding.buttonSetReminder.setOnClickListener {
             // Tampilkan BottomSheet untuk pengingat
             val bottomSheet = PlantReminderBottomSheet()
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+        }
+
+        binding.buttonChatbot.setOnClickListener {
+            // Arahkan ke halaman ChatbotFragment menggunakan Navigation Component
+            findNavController().navigate(R.id.action_plantCareFragment_to_chatbotFragment)
         }
     }
 

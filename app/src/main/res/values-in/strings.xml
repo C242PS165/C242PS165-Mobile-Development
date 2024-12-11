@@ -103,6 +103,7 @@
     <string name="btn_article">Lihat Artikel</string>
     <string name="close">Close</string>
     <string name="short_description">Deskripsi singkat</string>
+    <string name="desc">Do you have difficulty caring for plants? Maybe Gemini has a solution to your plant problems. Come ask!</string>
     <string-array name="category_array">
         <item>Tanaman Hias</item>
         <item>Tanaman Obat</item>

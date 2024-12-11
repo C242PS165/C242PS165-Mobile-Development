@@ -120,6 +120,28 @@
                 android:text="@string/time_set"
                 android:backgroundTint="#2196F3"
                 android:textColor="#FFFFFF" />
+
+            <!-- Teks Chatbot -->
+            <TextView
+                android:id="@+id/textViewChatbotPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/desc"
+                android:textSize="16sp"
+                android:textColor="#34495E"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Tombol Chatbot -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonChatbot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanya Gemini"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF" />
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -70,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.onBoardFragment,
                 R.id.loginFragment,
                 R.id.registerFragment,
-                R.id.plantCareFragment -> controlBottomNavigationVisibility(false)
+                R.id.plantCareFragment,
+                R.id.chatbotFragment -> controlBottomNavigationVisibility(false)
                 else -> controlBottomNavigationVisibility(true)
             }
         }
