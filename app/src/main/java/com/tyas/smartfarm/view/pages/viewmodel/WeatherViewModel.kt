@@ -1,9 +1,7 @@
 package com.tyas.smartfarm.view.pages.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import android.content.Context
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.api.ApiClient
 import com.tyas.smartfarm.model.WeatherData
@@ -99,7 +97,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         const val RAIN_THUNDERSTORM = "hujan petir"
         const val PARTLY_CLOUDY = "cerah berawan"
         const val SUNNY = "cerah"
-        const val HAZY = "kabut/asap"
+        const val HAZY = "udara kabur"
     }
 
     private fun generateWeatherMessage(weatherDesc: String?): String {
