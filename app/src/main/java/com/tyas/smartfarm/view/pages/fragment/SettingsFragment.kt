@@ -44,6 +44,11 @@ class SettingsFragment : Fragment() {
             settingsViewModel.updateNotificationsEnabled(isChecked)
             Toast.makeText(requireContext(), "Notifications ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
         }
+        
+        // Tombol Silang
+        binding.buttonClose.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
 
 
         binding.btnLanguageSettings.setOnClickListener {

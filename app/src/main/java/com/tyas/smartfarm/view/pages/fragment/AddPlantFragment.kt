@@ -50,6 +50,11 @@ class AddPlantFragment : Fragment() {
             savePlantData()
         }
 
+        // Tombol Silang
+        binding.buttonClose.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
         return binding.root
     }
 
