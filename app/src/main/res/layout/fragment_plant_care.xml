@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -21,12 +22,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Tombol Silang -->
+            <ImageButton
+                android:id="@+id/buttonClose"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|top"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/close"
+                android:src="@drawable/ic_close"
+                android:padding="8dp"
+                app:tint="@color/black" />
+
             <!-- Nama Tanaman -->
             <TextView
                 android:id="@+id/textViewPlantName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Tanaman"
+                android:text="@string/plant_name"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#2C3E50"
@@ -37,7 +50,7 @@
                 android:id="@+id/textViewPlantCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kategori"
+                android:text="@string/plant_category"
                 android:textSize="18sp"
                 android:textColor="#34495E"
                 android:layout_marginBottom="8dp" />
@@ -54,7 +67,7 @@
                 android:id="@+id/editTextPlantDescription"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:hint="Deskripsi Tanaman"
+                android:hint="@string/plant_desc"
                 android:textSize="16sp"
                 android:textColor="#34495E"
                 android:background="@android:drawable/editbox_background"
@@ -65,7 +78,7 @@
                 android:id="@+id/textViewPlantingDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tanggal Penanaman"
+                android:text="@string/planting_date"
                 android:textSize="16sp"
                 android:textColor="#34495E"
                 android:layout_marginBottom="16dp" />
@@ -83,8 +96,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Perbarui"
-                    android:backgroundTint="#4CAF50"
+                    android:text="@string/btn_update"
+                    android:backgroundTint="@color/dark_green"
                     android:textColor="#FFFFFF"
                     android:layout_marginEnd="8dp" />
 
@@ -93,7 +106,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Hapus"
+                    android:text="@string/btn_delete"
                     android:backgroundTint="#F44336"
                     android:textColor="#FFFFFF"
                     android:layout_marginStart="8dp" />
@@ -104,7 +117,7 @@
                 android:id="@+id/buttonSetReminder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Atur Pengingat Tanaman"
+                android:text="@string/time_set"
                 android:backgroundTint="#2196F3"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
