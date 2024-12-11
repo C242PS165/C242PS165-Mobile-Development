@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- RecyclerView untuk Menampilkan Percakapan -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Progress Bar (untuk Loading Jawaban) -->
+    <ProgressBar
+        android:id="@+id/progressBarLoading"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+    <!-- Input dan Tombol Kirim -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp">
+
+        <!-- Input Pesan -->
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ketik pesan Anda di sini"
+            android:textSize="16sp"
+            android:textColorHint="#AAAAAA"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine|textCapSentences" />
+
+        <!-- Tombol Kirim -->
+        <ImageButton
+            android:id="@+id/buttonSend"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_send"
+            android:background="@drawable/ripple_send_button"
+            android:contentDescription="Kirim"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>
