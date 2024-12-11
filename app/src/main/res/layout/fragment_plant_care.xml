@@ -138,7 +138,7 @@
                 android:id="@+id/buttonChatbot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tanya Gemini"
+                android:text="@string/btn_gemini"
                 android:backgroundTint="#4CAF50"
                 android:textColor="#FFFFFF" />
 
