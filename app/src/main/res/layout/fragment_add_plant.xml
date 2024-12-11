@@ -99,7 +99,7 @@
                     android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Deskripsi singkat"
+                    android:hint="@string/short_description"
                     android:textSize="16sp"
                     android:padding="12dp"
                     android:inputType="textMultiLine"/>

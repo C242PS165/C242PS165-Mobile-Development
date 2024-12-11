@@ -102,6 +102,7 @@
     <string name="btn_delete">Hapus</string>
     <string name="btn_article">Lihat Artikel</string>
     <string name="close">Close</string>
+    <string name="short_description">Deskripsi singkat</string>
     <string-array name="category_array">
         <item>Tanaman Hias</item>
         <item>Tanaman Obat</item>

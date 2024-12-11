@@ -102,6 +102,7 @@
     <string name="btn_delete">Delete</string>
     <string name="btn_article">Open the Article</string>
     <string name="close">Close</string>
+    <string name="short_description">Short description</string>
 
 
     <!-- Array Kategori Tanaman -->
