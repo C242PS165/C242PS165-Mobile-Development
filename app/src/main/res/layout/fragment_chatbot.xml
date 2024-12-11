@@ -3,6 +3,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Tombol Kembali -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Kembali"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chatbot"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:textColor="?attr/colorPrimary" />
+    </LinearLayout>
+
     <!-- RecyclerView untuk Menampilkan Percakapan -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
@@ -13,6 +40,17 @@
         android:padding="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp" />
+
+    <!-- Teks Pusat untuk Halaman Kosong -->
+    <TextView
+        android:id="@+id/textViewEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Gemini AI by Google"
+        android:textSize="18sp"
+        android:textColor="#AAAAAA"
+        android:visibility="visible" />
 
     <!-- Progress Bar (untuk Loading Jawaban) -->
     <ProgressBar

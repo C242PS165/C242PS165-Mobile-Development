@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,11 +33,18 @@ class ChatbotFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Tombol Kembali
+        val buttonBack = view.findViewById<ImageButton>(R.id.buttonBack)
+        buttonBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
         // Inisialisasi ViewModel
         chatViewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         // Inisialisasi RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChat)
+        val textViewEmpty = view.findViewById<TextView>(R.id.textViewEmpty)
         chatAdapter = ChatAdapter(messages)
         recyclerView.adapter = chatAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -45,6 +53,10 @@ class ChatbotFragment : Fragment() {
         chatViewModel.messages.observe(viewLifecycleOwner) { updatedMessages ->
             messages.clear()
             messages.addAll(updatedMessages)
+
+            // Tampilkan/hilangkan teks kosong berdasarkan jumlah pesan
+            textViewEmpty.visibility = if (messages.isEmpty()) View.VISIBLE else View.GONE
+
             chatAdapter.notifyDataSetChanged()
             recyclerView.scrollToPosition(messages.size - 1) // Scroll ke pesan terbaru
         }
