@@ -81,7 +81,12 @@
         android:id="@+id/plantCareFragment"
         android:name="com.tyas.smartfarm.view.pages.fragment.PlantCareFragment"
         tools:layout="@layout/fragment_plant_care"
-        android:label="Plant Care" />
+        android:label="Plant Care">
+
+        <action
+            android:id="@+id/action_plantCareFragment_to_chatbotFragment"
+            app:destination="@id/chatbotFragment" />
+    </fragment>
 
     <!-- Weather Fragment -->
     <fragment
@@ -124,4 +129,9 @@
             android:id="@+id/action_addPlantFragment_to_plantFragment"
             app:destination="@id/plantFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/chatbotFragment"
+        android:name="com.tyas.smartfarm.view.pages.fragment.ChatbotFragment"
+        android:label="ChatbotFragment" />
 </navigation>
