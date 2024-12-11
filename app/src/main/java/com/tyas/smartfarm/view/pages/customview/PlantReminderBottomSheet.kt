@@ -4,13 +4,16 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tyas.smartfarm.R
 import com.tyas.smartfarm.ReminderReceiver
@@ -57,9 +60,30 @@ class PlantReminderBottomSheet : BottomSheetDialogFragment() {
         // Set tombol untuk menyimpan pengingat
         val buttonSetReminderTime: Button = view.findViewById(R.id.buttonSetReminderTime)
         buttonSetReminderTime.setOnClickListener {
-            setReminder(selectedHour, selectedMinute)
-            dismiss() // Tutup BottomSheet setelah pengingat diset
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !canScheduleExactAlarms()) {
+                requestScheduleExactAlarmPermission()
+            } else {
+                setReminder(selectedHour, selectedMinute)
+                dismiss() // Tutup BottomSheet setelah pengingat diset
+            }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun canScheduleExactAlarms(): Boolean {
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        return alarmManager.canScheduleExactAlarms()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun requestScheduleExactAlarmPermission() {
+        Toast.makeText(
+            requireContext(),
+            "Aplikasi memerlukan izin untuk menyetel alarm tepat waktu.",
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+        startActivity(intent)
     }
 
     private fun setReminder(hour: Int, minute: Int) {
