@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/hourly_time"
+        android:id="@+id/date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:00"
@@ -15,13 +15,13 @@
         android:textColor="@android:color/white" />
 
     <ImageView
-        android:id="@+id/hourly_weather_icon"
+        android:id="@+id/weather_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_cloudy" />
 
     <TextView
-        android:id="@+id/hourly_temperature"
+        android:id="@+id/summary_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="26°"

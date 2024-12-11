@@ -26,7 +26,7 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tambah Tanaman"
+                android:text="@string/add_plant"
                 android:textSize="24sp"
                 android:textColor="#2C3E50"
                 android:fontFamily="sans-serif-medium"
@@ -44,7 +44,7 @@
                     android:id="@+id/etPlantName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Tanaman"
+                    android:hint="@string/plant_name"
                     android:textSize="16sp"
                     android:padding="12dp"
                     android:inputType="textPersonName"/>
@@ -55,7 +55,7 @@
                 android:id="@+id/tvCategoryLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kategori Tanaman"
+                android:text="@string/plant_category"
                 android:textSize="16sp"
                 android:textColor="#34495E"
                 android:layout_marginBottom="8dp"/>
@@ -72,7 +72,7 @@
                 android:id="@+id/tvDescriptionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Deskripsi Tanaman"
+                android:text="@string/plant_desc"
                 android:textSize="16sp"
                 android:textColor="#34495E"
                 android:layout_marginBottom="8dp"/>
@@ -98,7 +98,7 @@
                 android:id="@+id/tvDateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tanggal Penanaman"
+                android:text="@string/planting_date"
                 android:textSize="16sp"
                 android:textColor="#34495E"
                 android:layout_marginBottom="8dp"/>
@@ -113,7 +113,7 @@
                     android:id="@+id/etDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pilih Tanggal Tanam"
+                    android:hint="@string/choose_planting_date"
                     android:textSize="16sp"
                     android:padding="12dp"
                     android:focusable="false"
@@ -125,7 +125,7 @@
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Simpan"
+                android:text="@string/save"
                 android:backgroundTint="#3498DB"
                 android:textColor="@color/white"
                 android:padding="12dp"/>

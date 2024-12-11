@@ -16,7 +16,7 @@
         <!-- Image Section -->
         <ImageView
             android:id="@+id/iv_article_image"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:contentDescription="Plant Image" />
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:backgroundTint="@color/medium_sea_green"
-                android:text="Lihat Artikel"
+                android:text="@string/btn_article"
                 android:textSize="14sp"
                 app:cornerRadius="8dp"
                 android:layout_marginTop="12dp"

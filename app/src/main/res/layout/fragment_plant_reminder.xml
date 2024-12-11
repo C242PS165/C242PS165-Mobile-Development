@@ -9,7 +9,7 @@
         android:id="@+id/textViewReminderTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Atur Waktu Pengingat"
+        android:text="@string/time_set"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
@@ -48,7 +48,7 @@
         android:id="@+id/buttonSetReminderTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set Pengingat"
+        android:text="@string/set_pengingat"
         app:cornerRadius="12dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#4CAF50"

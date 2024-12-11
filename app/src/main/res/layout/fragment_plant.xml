@@ -8,14 +8,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="90dp">
 
         <!-- Section Title -->
         <TextView
             android:id="@+id/tv_monitor_your_plants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monitor Your Plants"
+            android:text="@string/monitor_your_plants"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_bold"
@@ -86,7 +87,7 @@
             android:id="@+id/tv_broadcast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Broadcast"
+            android:text="@string/broadcast"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_bold"
@@ -100,7 +101,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_recyclerview_background"
             android:padding="16dp"
-            android:text="Be careful! The next 3 days will be summer."
+            android:text="@string/be_careful"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:fontFamily="@font/poppins_medium"
@@ -114,7 +115,7 @@
             android:id="@+id/tv_articles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Some Articles for You"
+            android:text="@string/some_articles"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_bold"
