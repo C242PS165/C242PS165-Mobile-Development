@@ -139,7 +139,7 @@ class PlantFragment : Fragment() {
                 binding.progressBarArticles.visibility = View.VISIBLE
                 binding.rvArticles.visibility = View.GONE
 
-                val apiKey = "sk-f78d6751878343fd87895"
+                val apiKey = "sk-uXO2675a4067c3bf77975"
                 val response = articleApiService.getPlantArticles(apiKey).await()
 
                 val articles = response.data.map { articleData ->
