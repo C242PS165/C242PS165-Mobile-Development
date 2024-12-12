@@ -94,6 +94,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         const val CLOUDY = "berawan"
         const val THUNDERSTORM = "petir"
         const val LIGHT_RAIN = "hujan ringan"
+        const val MODERATE_RAIN = "hujan sedang"
         const val RAIN_THUNDERSTORM = "hujan petir"
         const val PARTLY_CLOUDY = "cerah berawan"
         const val SUNNY = "cerah"
@@ -106,6 +107,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             WeatherDescriptions.CLOUDY -> context.getString(R.string.weather_message_cloudy)
             WeatherDescriptions.THUNDERSTORM -> context.getString(R.string.weather_message_thunderstorm)
             WeatherDescriptions.LIGHT_RAIN -> context.getString(R.string.weather_message_light_rain)
+            WeatherDescriptions.MODERATE_RAIN -> context.getString(R.string.weather_message_moderate_rain) // Tambahan
             WeatherDescriptions.RAIN_THUNDERSTORM -> context.getString(R.string.weather_message_rain_thunderstorm)
             WeatherDescriptions.PARTLY_CLOUDY -> context.getString(R.string.weather_message_partly_cloudy)
             WeatherDescriptions.SUNNY -> context.getString(R.string.weather_message_sunny)
@@ -116,12 +118,14 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
 
 
 
+
     // Fungsi untuk memetakan deskripsi cuaca ke ikon
     fun getWeatherIconByDescription(description: String?): Int {
         return when (description?.lowercase()) {
             WeatherDescriptions.CLOUDY -> R.drawable.img
             WeatherDescriptions.THUNDERSTORM -> R.drawable.ic_thunderstorm
             WeatherDescriptions.LIGHT_RAIN -> R.drawable.ic_light_rain
+            WeatherDescriptions.MODERATE_RAIN -> R.drawable.ic_moderate_rain // Tambahan
             WeatherDescriptions.RAIN_THUNDERSTORM -> R.drawable.ic_rain_thunderstorm
             WeatherDescriptions.PARTLY_CLOUDY -> R.drawable.ic_partly_cloudy
             WeatherDescriptions.SUNNY -> R.drawable.ic_sunny
@@ -129,6 +133,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             else -> R.drawable.placeholder_image
         }
     }
+
 
 
 

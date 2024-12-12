@@ -105,6 +105,7 @@
     <string name="short_description">Deskripsi singkat</string>
     <string name="desc">Apakah kamu kesulitan dalam merawat tanaman? Mungkin Gemini punya solusi dari permasalahan tanamanmu. Ayo tanyakan!</string>
     <string name="btn_gemini">Tanya Gemini</string>
+    <string name="weather_message_moderate_rain">Hujan sedang, siapkan payung atau jas hujan!</string>
     <string-array name="category_array">
         <item>Tanaman Hias</item>
         <item>Tanaman Obat</item>

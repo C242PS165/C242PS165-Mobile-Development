@@ -105,6 +105,7 @@
     <string name="short_description">Short description</string>
     <string name="desc">Are you having trouble taking care of your plants? Maybe Gemini has a solution to your plant problems. Let\'s ask!</string>
     <string name="btn_gemini">Ask Gemini</string>
+    <string name="weather_message_moderate_rain">Moderate rain, prepare an umbrella or raincoat!</string>
 
 
     <!-- Array Kategori Tanaman -->
