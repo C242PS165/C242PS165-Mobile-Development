@@ -70,27 +70,26 @@ class PlantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Inisialisasi ViewModel
         plantViewModel = ViewModelProvider(this).get(PlantViewModel::class.java)
 
-        // Set up RecyclerView untuk tanaman
+        // Setup RecyclerView untuk tanaman
         plantAdapter = PlantAdapter { plant ->
             navigateToPlantCareFragment(plant)
         }
         binding.rvPlants.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = plantAdapter
-            visibility = View.GONE // Sembunyikan secara default
         }
 
-        // Set up RecyclerView untuk artikel
-        articleAdapter = ArticleAdapter(emptyList())
+        // Setup RecyclerView untuk artikel
+        articleAdapter = ArticleAdapter(emptyList()) // Kosongkan sementara
         binding.rvArticles.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = articleAdapter
-            visibility = View.GONE // Sembunyikan secara default
         }
 
-        // Observasi daftar tanaman
+        // Observasi data tanaman
         plantViewModel.plantList.observe(viewLifecycleOwner) { plants ->
             if (plants.isNotEmpty()) {
                 plantAdapter.submitList(plants)
@@ -102,7 +101,7 @@ class PlantFragment : Fragment() {
             }
         }
 
-        // Observasi status loading untuk tanaman
+        // Observasi status loading
         plantViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             if (isLoading) {
@@ -111,7 +110,7 @@ class PlantFragment : Fragment() {
             }
         }
 
-        // Panggil fetchArticles untuk memuat artikel
+        // Panggil fetchArticles untuk memuat data artikel
         fetchArticles()
 
         // Navigasi ke halaman tambah tanaman
@@ -135,7 +134,7 @@ class PlantFragment : Fragment() {
     private fun fetchArticles() {
         lifecycleScope.launch {
             try {
-                // Tampilkan ProgressBar untuk artikel dan sembunyikan RecyclerView
+                // Tampilkan ProgressBar dan sembunyikan RecyclerView
                 binding.progressBarArticles.visibility = View.VISIBLE
                 binding.rvArticles.visibility = View.GONE
 
@@ -155,15 +154,13 @@ class PlantFragment : Fragment() {
                     )
                 }
 
-                // Tampilkan artikel di RecyclerView
+                // Set data ke adapter dan tampilkan RecyclerView
                 articleAdapter.setArticles(articles)
                 binding.rvArticles.visibility = View.VISIBLE
             } catch (e: Exception) {
-                // Tampilkan pesan error jika gagal memuat artikel
                 Toast.makeText(requireContext(), "Failed to load articles: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Article Data", "Error fetching articles: ${e.message}", e)
+                Log.e("PlantFragment", "Error fetching articles: ${e.message}", e)
             } finally {
-                // Sembunyikan ProgressBar setelah proses selesai
                 binding.progressBarArticles.visibility = View.GONE
             }
         }
