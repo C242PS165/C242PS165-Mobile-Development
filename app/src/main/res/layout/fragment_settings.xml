@@ -45,6 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/change_language"
+        android:fontFamily="@font/poppins_medium"
         android:gravity="start|center"
         android:layout_marginTop="18dp"
         android:drawableEnd="@drawable/ic_arrow"
